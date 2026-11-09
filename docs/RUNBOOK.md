@@ -1,6 +1,6 @@
 # DocuProcess Cloud — Manual Técnico y Runbook de Operaciones
 **Curso:** Infraestructura III — Universidad ICESI  
-**Autores:** Equipo de Infraestructura y DevOps (Ángela & Robledo)  
+**Autores:** Equipo de Infraestructura y DevOps (Valeria & Robledo)  
 **Entorno:** Kubernetes v1.32.0 (Minikube v1.39.0 Engine)  
 **Estrategia:** Despliegue Progresivo Canary (NGINX Ingress) sin Terraform  
 

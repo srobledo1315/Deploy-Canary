@@ -1,13 +1,13 @@
 # Guion de Sustentación — DocuProcess Cloud
 **Asignatura:** Infraestructura III — Universidad ICESI  
-**Integrantes:** Ángela & Robledo  
+**Integrantes:** Valeria & Robledo  
 **Tiempo Total:** 15 Minutos (10 min Exposición Teórico-Técnica + 5 min Demostración en Vivo)  
 
 ---
 
-## Minuto 0:00 - 02:00 | Introducción y Caso de Negocio SaaS (Ángela)
+## Minuto 0:00 - 02:00 | Introducción y Caso de Negocio SaaS (Valeria)
 
-> **Ángela:**  
+> **Valeria:**  
 > "Buenas tardes profesor y compañeros. Hoy les presentamos **DocuProcess Cloud**, una plataforma SaaS diseñada para resolver un problema crítico en empresas medianas y grandes: el procesamiento asíncrono y análisis inteligente de grandes volúmenes de documentos, como facturas electrónicas, contratos legales e imágenes de identidad.
 > 
 > En modelos tradicionales, cuando cientos de usuarios cargan archivos pesados simultáneamente a fin de mes, las aplicaciones monolíticas colapsan, los usuarios experimentan pantallas congeladas y la empresa pierde dinero. DocuProcess Cloud fue concebida bajo una filosofía cloud-native: el usuario recibe una confirmación inmediata mediante un código HTTP 202 Accepted con un ID de seguimiento, mientras pipelines asíncronos en Kubernetes procesan, extraen metadatos OCR y notifican el resultado.
@@ -24,7 +24,7 @@
 ## Minuto 02:00 - 04:30 | Arquitectura K8s, Aislamiento y Redes L3/L4 (Robledo)
 
 > **Robledo:**  
-> "Gracias Ángela. Para garantizar alta disponibilidad, aislamiento y portabilidad, desplegamos DocuProcess Cloud sobre un clúster local de Kubernetes Minikube v1.39.0 utilizando únicamente manifiestos declarativos nativos, sin depender de Terraform.
+> "Gracias Valeria. Para garantizar alta disponibilidad, aislamiento y portabilidad, desplegamos DocuProcess Cloud sobre un clúster local de Kubernetes Minikube v1.39.0 utilizando únicamente manifiestos declarativos nativos, sin depender de Terraform.
 > 
 > Diseñamos una estricta separación de **Plano de Control** y **Plano de Datos** distribuida en 6 espacios de nombres lógicos:
 > - `docuprocess-app`, donde residen el Frontend en React 19 y dos despliegues del Backend en Java 21 y Spring Boot 3.5.
@@ -38,9 +38,9 @@
 
 ---
 
-## Minuto 04:30 - 06:30 | Identidad Enterprise SSO y Control de Roles (Ángela)
+## Minuto 04:30 - 06:30 | Identidad Enterprise SSO y Control de Roles (Valeria)
 
-> **Ángela:**  
+> **Valeria:**  
 > "En el ámbito de la seguridad de aplicación, los clientes corporativos exigen ir más allá de un simple usuario y contraseña. Implementamos **Keycloak 26** como proveedor de identidad federado mediante el protocolo OpenID Connect (OIDC).
 > 
 > Creamos el Realm corporativo `docuprocess-enterprise` con Control de Acceso Basado en Roles (RBAC), definiendo tres perfiles principales:
@@ -65,9 +65,9 @@
 
 ---
 
-## Minuto 09:30 - 14:00 | Demostración en Vivo / Live Demo (Ángela & Robledo en conjunto)
+## Minuto 09:30 - 14:00 | Demostración en Vivo / Live Demo (Valeria & Robledo en conjunto)
 
-> **Ángela:**  
+> **Valeria:**  
 > *(Mostrando el navegador en `http://app.docuprocess.local`)*  
 > "Aquí vemos el portal web de DocuProcess Cloud construido en React 19, Vite y TypeScript, con diseño responsive y soporte nativo para Modo Oscuro. Arriba observamos la sesión activa, el rol empresarial y la etiqueta del Backend que nos atendió: en este momento, la versión Estable v1.0.0.
 > 
@@ -84,10 +84,9 @@
 
 ---
 
-## Minuto 14:00 - 15:00 | Conclusiones y Cierre (Ángela)
+## Minuto 14:00 - 15:00 | Conclusiones y Cierre (Valeria)
 
-> **Ángela:**  
+> **Valeria:**  
 > "Para concluir, este proyecto demuestra cómo la ingeniería de infraestructura moderna cierra la brecha entre el desarrollo de software y la viabilidad empresarial. No solo logramos una plataforma escalable, segura y observable, sino que dotamos a la organización de herramientas para tomar decisiones basadas en datos de rendimiento y costo.
 > 
 > Muchas gracias por su atención, quedamos atentos a cualquier pregunta del profesor o de los compañeros."
-
