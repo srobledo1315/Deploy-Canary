@@ -49,3 +49,4 @@ echo "✅ Todos los recursos de Kubernetes han sido eliminados ordenadamente."
 echo "Para apagar el nodo Minikube y liberar RAM/CPU del host ejecute: 'minikube stop'"
 echo "Para destruir el clúster por completo ejecute: 'minikube delete'"
 echo "=============================================================================="
+
