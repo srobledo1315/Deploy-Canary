@@ -1,0 +1,151 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-realm-config
+  namespace: docuprocess-security
+  labels:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/component: identity-provider
+data:
+  docuprocess-realm.json: |
+    {
+      "realm": "docuprocess-enterprise",
+      "enabled": true,
+      "displayName": "DocuProcess Cloud Enterprise Identity",
+      "sslRequired": "none",
+      "registrationAllowed": false,
+      "loginWithEmailAllowed": true,
+      "duplicateEmailsAllowed": false,
+      "resetPasswordAllowed": true,
+      "editUsernameAllowed": false,
+      "bruteForceProtected": true,
+      "permanentLockout": false,
+      "maxFailureWaitSeconds": 900,
+      "minimumQuickLoginWaitSeconds": 60,
+      "waitIncrementSeconds": 60,
+      "quickLoginCheckMilliSeconds": 1000,
+      "maxDeltaTimeSeconds": 43200,
+      "failureFactor": 5,
+      "roles": {
+        "realm": [
+          {
+            "name": "TENANT_ADMIN",
+            "description": "Enterprise administrator with full access to tenant configuration and audit logs"
+          },
+          {
+            "name": "DOCUMENT_OPERATOR",
+            "description": "Standard user permitted to upload, process, and query documents"
+          },
+          {
+            "name": "AUDITOR",
+            "description": "Read-only auditor with access to execution traces, metrics, and billing reports"
+          }
+        ]
+      },
+      "groups": [
+        {
+          "name": "EnterpriseAdmins",
+          "realmRoles": ["TENANT_ADMIN"]
+        },
+        {
+          "name": "OperationsTeam",
+          "realmRoles": ["DOCUMENT_OPERATOR"]
+        },
+        {
+          "name": "ComplianceAuditors",
+          "realmRoles": ["AUDITOR"]
+        }
+      ],
+      "clients": [
+        {
+          "clientId": "docuprocess-frontend",
+          "name": "DocuProcess React 19 Frontend",
+          "enabled": true,
+          "publicClient": true,
+          "protocol": "openid-connect",
+          "standardFlowEnabled": true,
+          "implicitFlowEnabled": false,
+          "directAccessGrantsEnabled": true,
+          "serviceAccountsEnabled": false,
+          "publicClient": true,
+          "redirectUris": [
+            "http://app.docuprocess.local/*",
+            "http://localhost:5173/*",
+            "http://localhost/*",
+            "*"
+          ],
+          "webOrigins": [
+            "*"
+          ],
+          "attributes": {
+            "pkce.code.challenge.method": "S256",
+            "post.logout.redirect.uris": "+"
+          }
+        },
+        {
+          "clientId": "docuprocess-backend",
+          "name": "DocuProcess Spring Boot Resource Server",
+          "enabled": true,
+          "bearerOnly": true,
+          "protocol": "openid-connect"
+        }
+      ],
+      "users": [
+        {
+          "username": "admin@docuprocess.com",
+          "email": "admin@docuprocess.com",
+          "firstName": "Enterprise",
+          "lastName": "Admin",
+          "enabled": true,
+          "emailVerified": true,
+          "credentials": [
+            {
+              "type": "password",
+              "value": "AdminPass2026!",
+              "temporary": false
+            }
+          ],
+          "realmRoles": [
+            "TENANT_ADMIN",
+            "DOCUMENT_OPERATOR"
+          ]
+        },
+        {
+          "username": "operator@docuprocess.com",
+          "email": "operator@docuprocess.com",
+          "firstName": "Carlos",
+          "lastName": "Operador",
+          "enabled": true,
+          "emailVerified": true,
+          "credentials": [
+            {
+              "type": "password",
+              "value": "OperatorPass2026!",
+              "temporary": false
+            }
+          ],
+          "realmRoles": [
+            "DOCUMENT_OPERATOR"
+          ]
+        },
+        {
+          "username": "auditor@docuprocess.com",
+          "email": "auditor@docuprocess.com",
+          "firstName": "Angela",
+          "lastName": "Auditora",
+          "enabled": true,
+          "emailVerified": true,
+          "credentials": [
+            {
+              "type": "password",
+              "value": "AuditorPass2026!",
+              "temporary": false
+            }
+          ],
+          "realmRoles": [
+            "AUDITOR"
+          ]
+        }
+      ]
+    }

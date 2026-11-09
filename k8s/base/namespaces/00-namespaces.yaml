@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: docuprocess-app
+  labels:
+    name: docuprocess-app
+    app.kubernetes.io/part-of: docuprocess-cloud
+    pod-security.kubernetes.io/enforce: baseline
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: docuprocess-data
+  labels:
+    name: docuprocess-data
+    app.kubernetes.io/part-of: docuprocess-cloud
+    pod-security.kubernetes.io/enforce: baseline
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: docuprocess-security
+  labels:
+    name: docuprocess-security
+    app.kubernetes.io/part-of: docuprocess-cloud
+    pod-security.kubernetes.io/enforce: baseline
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: docuprocess-logging
+  labels:
+    name: docuprocess-logging
+    app.kubernetes.io/part-of: docuprocess-cloud
+    pod-security.kubernetes.io/enforce: baseline
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: docuprocess-monitoring
+  labels:
+    name: docuprocess-monitoring
+    app.kubernetes.io/part-of: docuprocess-cloud
+    pod-security.kubernetes.io/enforce: baseline
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: docuprocess-finops
+  labels:
+    name: docuprocess-finops
+    app.kubernetes.io/part-of: docuprocess-cloud
+    pod-security.kubernetes.io/enforce: baseline

@@ -1,0 +1,50 @@
+# Persistent Volume Claim for PostgreSQL Database (docuprocess-data)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-pvc
+  namespace: docuprocess-data
+  labels:
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/component: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+# Persistent Volume Claim for Document and Image Storage (docuprocess-app)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: docuprocess-storage-pvc
+  namespace: docuprocess-app
+  labels:
+    app.kubernetes.io/name: docuprocess-storage
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/component: file-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+# Persistent Volume Claim for Elasticsearch Data (docuprocess-logging)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: elasticsearch-data-pvc
+  namespace: docuprocess-logging
+  labels:
+    app.kubernetes.io/name: elasticsearch
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/component: search-indexer
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

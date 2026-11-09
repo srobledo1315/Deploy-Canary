@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-scripts
+  namespace: docuprocess-data
+  labels:
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/component: database
+data:
+  init-databases.sh: |
+    #!/bin/bash
+    set -e
+
+    echo "Executing PostgreSQL Database Initialization for DocuProcess Cloud..."
+
+    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+        -- Setup schema and extensions for docuprocess_db
+        CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+        CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+        -- Create user and database for Keycloak SSO
+        CREATE USER ${KEYCLOAK_DB_USER} WITH ENCRYPTED PASSWORD '${KEYCLOAK_DB_PASSWORD}';
+        CREATE DATABASE ${KEYCLOAK_DB_NAME} OWNER ${KEYCLOAK_DB_USER};
+        GRANT ALL PRIVILEGES ON DATABASE ${KEYCLOAK_DB_NAME} TO ${KEYCLOAK_DB_USER};
+    EOSQL
+
+    echo "PostgreSQL initialization completed successfully."
