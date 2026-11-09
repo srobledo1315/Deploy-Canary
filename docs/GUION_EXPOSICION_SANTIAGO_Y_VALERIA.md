@@ -90,3 +90,4 @@
 > "Para concluir, este proyecto demuestra cómo la ingeniería de infraestructura moderna cierra la brecha entre el desarrollo de software y la viabilidad empresarial. No solo logramos una plataforma escalable, segura y observable, sino que dotamos a la organización de herramientas para tomar decisiones basadas en datos de rendimiento y costo.
 > 
 > Muchas gracias por su atención, quedamos atentos a cualquier pregunta del profesor o de los compañeros."
+
