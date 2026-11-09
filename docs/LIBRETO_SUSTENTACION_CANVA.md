@@ -1,228 +1,267 @@
-# Libreto Oficial de Sustentación — DocuProcess Cloud (Canva Slides)
+# Libreto Oficial de Sustentación — DocuProcess Cloud (15 Diapositivas en Canva)
 
 **Asignatura:** Plataformas II — Departamento de TIC — Universidad ICESI  
 **Autores y Expositores:** Santiago Gómez Robledo & Valeria Ortiz  
-**Duración Total:** 15 Minutos (10 minutos de sustentación teórica/arquitectónica + 5 minutos de demostración en vivo)  
+**Duración Total:** 15 Minutos (10 minutos exposición teórica/arquitectónica + 4 minutos demostración en vivo + 1 minuto conclusiones y preguntas)  
 **Entorno de Demostración:** Kubernetes v1.32.0 (Minikube v1.39.0 sobre Containerd, 8 vCPUs, 14 GiB RAM)  
-**Enlace a la Presentación Oficial en Canva:** [https://canva.link/ei6fwopawpoey6r](https://canva.link/ei6fwopawpoey6r)  
-**Enlace Directo de Edición (Canva App):** [https://www.canva.com/d/8M04aX33msDShbP](https://www.canva.com/d/8M04aX33msDShbP)  
-**ID del Diseño:** `DAHacpdbq-Y` (11 diapositivas generadas en la cuenta de Santiago Gomez Robledo)  
 
 ---
 
-## Estructura Temporal y Distribución de Roles
+## Estructura Temporal y Distribución de Roles (15 Diapositivas)
 
 | Diapositiva | Título de la Diapositiva | Orador Principal | Tiempo Sugerido |
 | :---: | :--- | :---: | :---: |
-| **1** | Portada y Presentación Ejecutiva | **Santiago & Valeria** | 00:00 - 01:00 |
-| **2** | El Caso de Negocio SaaS y el Desafío de Escalamiento | **Valeria Ortiz** | 01:00 - 02:15 |
-| **3** | Arquitectura de Microservicios y Segmentación de Red | **Santiago Gómez Robledo** | 02:15 - 03:30 |
-| **4** | Seguridad Perimetral L3/L4 y Modelo Zero-Trust | **Santiago Gómez Robledo** | 03:30 - 04:30 |
-| **5** | Identidad Enterprise Federada y SSO (Keycloak 26) | **Valeria Ortiz** | 04:30 - 05:45 |
-| **6** | Observabilidad Multinivel: Modelos RED y USE | **Valeria Ortiz** | 05:45 - 07:00 |
-| **7** | Elasticidad Automática con Horizontal Pod Autoscaler (HPA v2) | **Santiago Gómez Robledo** | 07:00 - 08:00 |
-| **8** | Gobierno Financiero FinOps con Kubecost | **Valeria Ortiz** | 08:00 - 09:00 |
-| **9** | Despliegue Progresivo: Estrategia Canary Deployment | **Santiago Gómez Robledo** | 09:00 - 10:00 |
-| **10** | Validación Operativa y Demostración en Vivo (Live Demo) | **Santiago & Valeria** | 10:00 - 14:00 |
-| **11** | Conclusiones y Valor Estratégico de Plataformas II | **Santiago & Valeria** | 14:00 - 15:00 |
+| **1** | Portada & Presentación Ejecutiva | **Santiago & Valeria** | 00:00 - 00:50 |
+| **2** | El Desafío Enterprise y la Oportunidad SaaS | **Valeria Ortiz** | 00:50 - 01:45 |
+| **3** | Propuesta de Valor y Filosofía Cloud-Native | **Valeria Ortiz** | 01:45 - 02:40 |
+| **4** | Topología Kubernetes y Segmentación de Namespaces | **Santiago Gómez Robledo** | 02:40 - 03:40 |
+| **5** | Capa de Aplicación: Frontend React 19 y Backend Java 21 | **Santiago Gómez Robledo** | 03:40 - 04:35 |
+| **6** | Persistencia Transaccional y StatefulSets | **Santiago Gómez Robledo** | 04:35 - 05:30 |
+| **7** | Seguridad Perimetral L3/L4: Modelo Zero-Trust | **Santiago Gómez Robledo** | 05:30 - 06:30 |
+| **8** | Identidad Enterprise Federada y SSO (Keycloak 26) | **Valeria Ortiz** | 06:30 - 07:30 |
+| **9** | Observabilidad de Aplicación: Modelo RED | **Valeria Ortiz** | 07:30 - 08:25 |
+| **10** | Observabilidad de Infraestructura: Modelo USE | **Valeria Ortiz** | 08:25 - 09:15 |
+| **11** | Trazabilidad Distribuida E2E y Correlación de Logs | **Valeria Ortiz** | 09:15 - 10:10 |
+| **12** | Elasticidad Automática con HPA v2 | **Santiago Gómez Robledo** | 10:10 - 11:05 |
+| **13** | Gobierno Financiero y FinOps con Kubecost | **Valeria Ortiz** | 11:05 - 12:00 |
+| **14** | Despliegue Progresivo: Estrategia Canary Deployment | **Santiago Gómez Robledo** | 12:00 - 13:00 |
+| **15** | Validación Operativa (Live Demo) y Conclusiones | **Santiago & Valeria** | 13:00 - 15:00 |
 
 ---
 
 ## Desarrollo Diapositiva por Diapositiva
 
-### Diapositiva 1: Portada y Presentación Ejecutiva
-- **Visual en Canva:** Título de alto impacto *DocuProcess Cloud*, subtítulo del curso *Plataformas II - Universidad ICESI*, nombres de los integrantes e insignias de tecnologías (Kubernetes, Spring Boot, React 19, Keycloak, Prometheus, Grafana, ELK, Kubecost).
-- **Tiempo:** 1 minuto (00:00 - 01:00).
+### Diapositiva 1: Portada & Presentación Ejecutiva
+- **Visual en Canva:** Logotipo estilizado de DocuProcess Cloud, título de la plataforma, curso *Plataformas II - Universidad ICESI*, nombres de los integrantes e insignias de tecnologías (*Kubernetes, Spring Boot, React 19, Keycloak, Prometheus, Grafana, ELK, Kubecost*).
+- **Tiempo:** 50 segundos (00:00 - 00:50).
 - **Oradores:** Santiago Gómez Robledo y Valeria Ortiz.
 
 > **Santiago:**  
-> *"Buenas tardes profesor y compañeros. Hoy tenemos el gusto de presentarles **DocuProcess Cloud**, nuestro proyecto final para el curso de **Plataformas II** en la Universidad ICESI. Mi nombre es Santiago Gómez Robledo y junto a mi compañera Valeria Ortiz diseñamos, implementamos y desplegamos una plataforma SaaS Enterprise de alta disponibilidad enfocada en el procesamiento asíncrono y análisis de documentos corporativos."*
+> *"Buenas tardes profesor y compañeros. Hoy les presentamos **DocuProcess Cloud**, nuestro proyecto final para el curso de **Plataformas II** en la Universidad ICESI. Mi nombre es Santiago Gómez Robledo y junto a mi compañera Valeria Ortiz diseñamos una plataforma SaaS Enterprise orientada a la ingesta, procesamiento asíncrono y análisis inteligente de documentos e imágenes corporativas."*
 
 > **Valeria:**  
-> *"En este proyecto no nos limitamos a escribir código de backend y frontend; diseñamos una solución integral cloud-native operada sobre Kubernetes que aborda los desafíos reales de las empresas modernas: autenticación federada con SSO y MFA, aislamiento perimetral estricto Zero-Trust, observabilidad multinivel bajo los modelos RED y USE, gobernanza financiera con FinOps y despliegues progresivos sin indisponibilidad mediante Canary Deployments."*
+> *"En este proyecto no nos limitamos a escribir código de backend y frontend; implementamos una arquitectura integral cloud-native operada sobre Kubernetes que resuelve los desafíos de las empresas modernas: autenticación federada con SSO y MFA, aislamiento perimetral estricto Zero-Trust, observabilidad multinivel bajo los modelos RED y USE, gobernanza financiera con FinOps y despliegues progresivos sin indisponibilidad mediante Canary Deployments."*
 
 ---
 
-### Diapositiva 2: El Caso de Negocio SaaS y el Desafío de Escalamiento
-- **Visual en Canva:** Gráfico comparativo entre arquitecturas síncronas tradicionales (pantallas congeladas, colapso HTTP) vs. la arquitectura asíncrona de DocuProcess Cloud (código HTTP 202 Accepted inmediato + procesamiento en background).
-- **Tiempo:** 1 minuto 15 segundos (01:00 - 02:15).
+### Diapositiva 2: El Desafío Enterprise y la Oportunidad SaaS
+- **Visual en Canva:** Esquema del dolor del cliente: diagrama de servidor monolítico colapsando ante avalancha de peticiones HTTP síncronas en cierre de mes, timeouts en navegador y error HTTP 504 Gateway Timeout.
+- **Tiempo:** 55 segundos (00:50 - 01:45).
 - **Orador:** Valeria Ortiz.
 
 > **Valeria:**  
-> *"Para entender la arquitectura, primero debemos entender el dolor del negocio. Imaginemos una compañía enterprise —como un banco, una aseguradora o una firma contable— donde al final de cada mes miles de analistas cargan simultáneamente facturas electrónicas, declaraciones de renta y contratos legales.*  
+> *"Para dimensionar la relevancia de la arquitectura, examinemos el problema de negocio. En organizaciones medianas y grandes —como bancos, aseguradoras y firmas legales— los cierres de mes generan avalanchas de miles de facturas y contratos pesados que deben digitalizarse al mismo tiempo.*  
 >  
-> *En los sistemas tradicionales con llamadas HTTP síncronas, el servidor web retiene el hilo de conexión mientras ejecuta la extracción OCR pesada. El resultado es devastador: timeouts en los navegadores, errores HTTP 504 Gateway Timeout, pérdida de información y clientes corporativos frustrados.*  
+> *En los sistemas tradicionales con llamadas HTTP síncronas, el servidor web retiene el hilo de conexión del cliente mientras ejecuta la extracción OCR pesada. El resultado es fatal: hilos agotados, navegadores congelados, errores HTTP 504 Gateway Timeout y pérdidas millonarias por retrasos operativos.*  
 >  
-> *DocuProcess Cloud resuelve esto mediante una arquitectura orientada a eventos desacoplada: cuando el usuario sube un archivo, el sistema valida la carga en milisegundos, almacena el binario en un volumen persistente y responde de inmediato un código **HTTP 202 Accepted** junto a un UUID de seguimiento. El procesamiento y análisis OCR ocurren de manera asíncrona en pools elásticos de cómputo, garantizando que el usuario jamás experimente bloqueos."*
+> *Comprendimos que la solución no era comprar servidores más grandes, sino desacoplar radicalmente la ingesta del cómputo pesado mediante un pipeline cloud-native orientado a eventos."*
 
 ---
 
-### Diapositiva 3: Arquitectura de Microservicios y Segmentación de Red
-- **Visual en Canva:** Diagrama de bloques de la topología Kubernetes, mostrando los 6 namespaces (`docuprocess-app`, `data`, `security`, `logging`, `monitoring`, `finops`) y la separación nítida entre el Plano de Control y el Plano de Datos.
-- **Tiempo:** 1 minuto 15 segundos (02:15 - 03:30).
+### Diapositiva 3: Propuesta de Valor y Filosofía Cloud-Native
+- **Visual en Canva:** Flujo desacoplado: Ingesta en <50ms retornando `HTTP 202 Accepted` + `tracking_id`, almacenamiento seguro en PVC y pools elásticos de workers en segundo plano.
+- **Tiempo:** 55 segundos (01:45 - 02:40).
+- **Orador:** Valeria Ortiz.
+
+> **Valeria:**  
+> *"Nuestra propuesta de valor se basa en tres principios de ingeniería:*  
+> *1. **Ingesta Inmediata No Bloqueante:** Cuando un usuario o un sistema ERP sube un lote de documentos, el servicio valida la estructura en menos de 50 milisegundos, almacena el binario y retorna de inmediato un código **HTTP 202 Accepted** junto a un UUID de seguimiento (`tracking_id`).*  
+> *2. **Cómputo Elástico en Background:** El procesamiento documental pesado se despacha hacia pools de trabajadores elásticos que extraen metadatos y notifican el resultado sin bloquear al usuario.*  
+> *3. **Arquitectura Multi-Tenant:** Cada cliente corporativo opera con aislamiento estricto de recursos y alta disponibilidad garantizada las 24 horas del día."*
+
+---
+
+### Diapositiva 4: Topología Kubernetes y Segmentación de Namespaces
+- **Visual en Canva:** Diagrama del clúster Minikube distribuido en 6 namespaces (`docuprocess-app`, `data`, `security`, `logging`, `monitoring`, `finops`), ilustrando la separación nítida entre el Plano de Control y el Plano de Datos.
+- **Tiempo:** 1 minuto (02:40 - 03:40).
 - **Orador:** Santiago Gómez Robledo.
 
 > **Santiago:**  
-> *"Para materializar este SaaS, desplegamos un clúster local de Kubernetes Minikube configurado con 8 núcleos de CPU y 14 GiB de memoria RAM sobre el motor Containerd. Una de las restricciones de diseño más exigentes fue **no utilizar Terraform bajo ninguna circunstancia**, basando el aprovisionamiento en manifiestos puramente declarativos de Kubernetes.*  
+> *"Para alojar este ecosistema, configuramos un clúster de Kubernetes v1.32.0 sobre Minikube con 8 núcleos de CPU y 14 GiB de memoria RAM utilizando el runtime Containerd. Una restricción arquitectónica central fue **no utilizar Terraform bajo ninguna circunstancia**, basando el 100% del despliegue en manifiestos declarativos nativos de Kubernetes.*  
 >  
-> *Organizamos la infraestructura en 6 namespaces aislados:*  
-> *1. `docuprocess-app`: Hospeda las dos réplicas del frontend en React 19 y las versiones Stable y Canary del backend Spring Boot 3.5 en Java 21.*  
-> *2. `docuprocess-data`: Contiene el StatefulSet de PostgreSQL 17 con almacenamiento PVC dedicado de 5 GiB y extensiones criptográficas `pgcrypto`.*  
-> *3. `docuprocess-security`: Aloja el Identity Provider Keycloak 26 en Quarkus.*  
-> *4. `docuprocess-logging`: El Stack ELK completo (Elasticsearch 8.17, Logstash y Kibana).*  
-> *5. `docuprocess-monitoring`: Plataforma unificada de observabilidad con Prometheus, Alertmanager, OpenTelemetry Collector y Jaeger.*  
-> *6. `docuprocess-finops`: Kubecost 2.8.7 para monitoreo de costos.*  
+> *Segmentamos la solución en 6 namespaces de propósito específico:*  
+> *- `docuprocess-app`: Cargas de trabajo de usuario (Frontend React 19 y Backend Java 21).*  
+> *- `docuprocess-data`: PostgreSQL 17 relacional con almacenamiento dinámico PVC.*  
+> *- `docuprocess-security`: Keycloak 26 gestionando realms y políticas OIDC.*  
+> *- `docuprocess-logging`: Stack ELK (Elasticsearch 8.17, Logstash y Kibana).*  
+> *- `docuprocess-monitoring`: Prometheus, Alertmanager, OpenTelemetry y Jaeger.*  
+> *- `docuprocess-finops`: Kubecost 2.8.7 para monitoreo de gasto.*  
 >  
-> *Todo el tráfico externo ingresa a través del Ingress Controller NGINX, terminando conexiones y aplicando balanceo L7."*
+> *Todo el acceso externo se centraliza a través del Ingress Controller NGINX, terminando conexiones y aplicando balanceo L7."*
 
 ---
 
-### Diapositiva 4: Seguridad Perimetral L3/L4 y Modelo Zero-Trust
-- **Visual en Canva:** Diagrama de red de Capa 3 y 4 (OSI) ilustrando las NetworkPolicies, la regla predeterminada `Default Deny` y las flechas de tráfico estrictamente autorizadas hacia PostgreSQL y el Backend.
-- **Tiempo:** 1 minuto (03:30 - 04:30).
+### Diapositiva 5: Capa de Aplicación: Frontend React 19 y Backend Java 21
+- **Visual en Canva:** Diagrama de Clean Architecture en 4 capas (Domain, Application, Infrastructure, Presentation) junto a las insignias de React 19, TypeScript, Vite, Tailwind CSS y Java 21 Spring Boot 3.5.
+- **Tiempo:** 55 segundos (03:40 - 04:35).
 - **Orador:** Santiago Gómez Robledo.
 
 > **Santiago:**  
-> *"En un entorno multi-tenant enterprise, la seguridad no puede depender de confiar ciegamente en la red interna. Por ello implementamos un modelo **Zero-Trust** utilizando Kubernetes NetworkPolicies nativas.*  
+> *"En el plano de aplicación aplicamos los principios de **Clean Architecture**, aislando completamente las reglas del dominio de los frameworks web y bases de datos:*  
 >  
-> *La regla fundacional es un **Default Deny** en las Capas 3 y 4: ningún pod puede emitir tráfico de red hacia otro a menos que exista una política explícita que lo autorice.  
->  
-> *Diseñamos tres reglas de ingreso granular:*  
-> *1. El Frontend y Backend solo aceptan tráfico HTTP proveniente exclusivamente de los pods del namespace `ingress-nginx`.*  
-> *2. La base de datos PostgreSQL en el puerto TCP 5432 solo admite paquetes originados por pods etiquetados con `app: docuprocess-backend` o `app.kubernetes.io/name: keycloak`.*  
->  
-> *Si un atacante o un contenedor comprometido en el namespace de logging o monitoring intentara ejecutar un escaneo lateral o una conexión TCP hacia la base de datos, el kernel de Linux a través del CNI descarta los paquetes de inmediato sin respuesta."*
+> *- **Frontend:** Desarrollado en React 19 con TypeScript, Vite y Tailwind CSS. Implementa Dark Mode nativo, diseño responsive para dispositivos móviles y comunicación asíncrona mediante tokens federados OIDC.*  
+> *- **Backend:** Construido en Java 21 LTS y Spring Boot 3.5.x. Está empaquetado en imágenes de contenedor OCI multi-stage seguras, que ejecutan con un usuario sin privilegios (`UID 10001 non-root`).*  
+> *- **Instrumentación Nativa:** El backend incorpora Spring Boot Actuator para exportar métricas a Prometheus y el SDK de OpenTelemetry para inyectar cabeceras de trazabilidad en cada solicitud."*
 
 ---
 
-### Diapositiva 5: Identidad Enterprise Federada y SSO (Keycloak 26)
+### Diapositiva 6: Persistencia Transaccional y StatefulSets
+- **Visual en Canva:** Diagrama de PostgreSQL 17 StatefulSet, volúmenes persistentes PVCs (`postgres-data-pvc` 5Gi y `docuprocess-storage-pvc` 10Gi) y esquemas desacoplados `docuprocess_db` y `keycloak_db`.
+- **Tiempo:** 55 segundos (04:35 - 05:30).
+- **Orador:** Santiago Gómez Robledo.
+
+> **Santiago:**  
+> *"Para garantizar la integridad y durabilidad de los datos corporativos, desplegamos **PostgreSQL 17** mediante un StatefulSet de Kubernetes:*  
+>  
+> *- **Almacenamiento Persistente Dinámico:** Vinculamos el PVC `postgres-data-pvc` de 5 GiB bajo la clase `standard`, lo que garantiza que ante reinicios o fallas del pod, los datos jamás se pierdan.*  
+> *- **Separación de Esquemas:** Aislamos la base de datos de negocio (`docuprocess_db`) de la base de datos de identidad (`keycloak_db`), impidiendo que un problema de transacciones en la aplicación comprometa la autenticación.*  
+> *- **Criptografía y Auditoría:** Habilitamos las extensiones `pgcrypto` y `uuid-ossp` directamente en el motor de base de datos.*  
+> *- **Almacenamiento de Binarios:** Un segundo PVC de 10 GiB (`docuprocess-storage-pvc`) actúa como repositorio centralizado para los documentos procesados."*
+
+---
+
+### Diapositiva 7: Seguridad Perimetral L3/L4: Modelo Zero-Trust
+- **Visual en Canva:** Diagrama de red de Capa 3 y 4 (OSI) ilustrando las NetworkPolicies, la regla predeterminada `Default Deny` y el bloqueo de cualquier tráfico lateral hacia PostgreSQL.
+- **Tiempo:** 1 minuto (05:30 - 06:30).
+- **Orador:** Santiago Gómez Robledo.
+
+> **Santiago:**  
+> *"En un SaaS Enterprise multi-tenant, la seguridad perimetral no puede asumir que la red interna es segura. Por ello implementamos un modelo **Zero-Trust** con Kubernetes NetworkPolicies nativas en las Capas 3 y 4 del modelo OSI:*  
+>  
+> *- **Default Deny:** Todo el tráfico entre pods se bloquea de forma predeterminada.*  
+> *- **Ingreso Controlado:** El Frontend y el Backend únicamente aceptan conexiones HTTP procedentes de los pods del namespace `ingress-nginx`.*  
+> *- **Protección de Base de Datos:** PostgreSQL en el puerto TCP 5432 rechaza cualquier paquete que no provenga estrictamente de pods etiquetados `app: docuprocess-backend` o `app.kubernetes.io/name: keycloak`.*  
+>  
+> *Cualquier intento de escaneo lateral por parte de un contenedor comprometido es descartado a nivel de kernel mediante el CNI sin responder paquetes SYN-ACK."*
+
+---
+
+### Diapositiva 8: Identidad Enterprise Federada y SSO (Keycloak 26)
 - **Visual en Canva:** Pantalla de Login SSO corporativo, flujo OIDC con OpenID Connect y Authorization Code Flow con PKCE, y detalle de roles RBAC (`TENANT_ADMIN`, `OPERATOR`, `AUDITOR`) y MFA (TOTP).
-- **Tiempo:** 1 minuto 15 segundos (04:30 - 05:45).
+- **Tiempo:** 1 minuto (06:30 - 07:30).
 - **Orador:** Valeria Ortiz.
 
 > **Valeria:**  
-> *"En el apartado de identidad, los requerimientos del proyecto exigían ir mucho más allá del clásico login con usuario y contraseña cableados en una tabla. Integramos **Keycloak 26**, la solución líder de identidad federada de código abierto.*  
+> *"En la capa de seguridad e identidad integramos **Keycloak 26**, la plataforma de identidad federada de código abierto basada en Quarkus:*  
 >  
-> *Configuramos el Realm dedicado `docuprocess-enterprise`, aplicando los estándares OIDC y OAuth 2.0:*  
-> *1. **Control de Acceso Basado en Roles (RBAC):** Definimos perfiles estrictos; por ejemplo, `TENANT_ADMIN` tiene control total de la organización, `OPERATOR` puede procesar documentos y `AUDITOR` únicamente tiene lectura sobre métricas y registros contables.*  
-> *2. **Seguridad Robusta:** Implementamos protección contra ataques de fuerza bruta (bloqueando cuentas tras múltiples intentos fallidos), directivas de contraseñas seguras y **Autenticación Multifactor (MFA)** mediante Time-Based One-Time Password (TOTP).*  
-> *3. **Validación Criptográfica:** El Frontend React 19 obtiene un token JWT firmado criptográficamente que el Backend Java valida en memoria sin necesidad de consultar la base de datos en cada petición, optimizando la latencia."*
+> *- **Estándar Abierto:** Implementamos OpenID Connect (OIDC) y OAuth 2.0 con flujo Authorization Code con PKCE para el Frontend React.*  
+> *- **Control de Acceso Basado en Roles (RBAC):** Definimos roles estrictos en el realm `docuprocess-enterprise`: `TENANT_ADMIN` para administración de la organización, `DOCUMENT_OPERATOR` para la carga y gestión de archivos, y `AUDITOR` con acceso exclusivo de lectura a métricas y logs.*  
+> *- **Defensa Activa:** Incorporamos protección contra ataques de fuerza bruta (bloqueo automático tras intentos erróneos) y **Autenticación Multifactor (MFA)** obligatoria mediante códigos TOTP temporales.*  
+> *- **Tokens JWT:** Los tokens de sesión son validados criptográficamente en memoria por el backend Java sin saturar la base de datos."*
 
 ---
 
-### Diapositiva 6: Observabilidad Multinivel: Modelos RED y USE
-- **Visual en Canva:** Tabla de dos columnas comparando el Modelo RED (Rate, Errors, Duration para la aplicación) con el Modelo USE (Utilization, Saturation, Errors para la infraestructura), mostrando la correlación de trazas con Jaeger y logs con ELK.
-- **Tiempo:** 1 minuto 15 segundos (05:45 - 07:00).
+### Diapositiva 9: Observabilidad de Aplicación: Modelo RED
+- **Visual en Canva:** Paneles del Modelo RED en Grafana mostrando Rate (RPS por versión), Errors (tasa 5xx < 2% con Alertmanager) y Duration (latencia P95/P99 < 2.5s).
+- **Tiempo:** 55 segundos (07:30 - 08:25).
 - **Orador:** Valeria Ortiz.
 
 > **Valeria:**  
-> *"Una de las joyas del proyecto es su plataforma de observabilidad integral. No nos limitamos a graficar el uso de CPU; implementamos los dos marcos de referencia recomendados por la industria:*  
+> *"Pasando a la observabilidad, estructuramos el monitoreo bajo dos marcos reconocidos internacionalmente. El primero es el **Modelo RED**, orientado al cliente y la aplicación:*  
 >  
-> *Primero, el **Modelo RED** enfocado en el cliente y la aplicación:*  
-> *- **Rate (Tasa):** Medimos las peticiones por segundo desglosadas por versión.*  
-> *- **Errors (Errores):** Vigilamos el porcentaje de respuestas HTTP 5xx, con una regla de alerta crítica en Alertmanager si supera el 2%.*  
-> *- **Duration (Duración):** Monitoreamos la latencia del pipeline asíncrono con percentiles $P_{50}, P_{95}$ y $P_{99}$, disparando alertas si $P_{99}$ supera los 2.5 segundos.*  
->  
-> *Segundo, el **Modelo USE** enfocado en la infraestructura física:*  
-> *- **Utilization:** Consumo de CPU y memoria de nodos y pods recopilado por cAdvisor.*  
-> *- **Saturation:** Profundidad de colas de procesamiento y presión de memoria cgroups.*  
-> *- **Errors:** Conteo de caídas o reinicios inesperados de contenedores.*  
->  
-> *Y lo más valioso: **Correlación Distribuida**. Cada log enviado a Logstash e indexado en Elasticsearch contiene el mismo `traceId` generado por el OpenTelemetry SDK, lo que permite pasar de un log con error en Kibana directamente a la traza en Jaeger para ver en qué milisegundo exacto ocurrió el cuello de botella."*
+> *- **Rate (Tasa de Peticiones):** Medimos las solicitudes por segundo desglosadas por versión de microservicio (Stable vs Canary).*  
+> *- **Errors (Tasa de Errores):** Supervisamos el porcentaje de respuestas HTTP 4xx y 5xx. Configuramos una regla de alerta crítica en Alertmanager que se dispara si la tasa de errores 5xx supera el 2%.*  
+> *- **Duration (Latencia):** Controlamos el tiempo de respuesta del procesamiento documental mediante percentiles estadísticos $P_{50}, P_{95}$ y $P_{99}$. Si la latencia $P_{99}$ excede los 2.5 segundos, el sistema emite una alarma inmediata de degradación de servicio."*
 
 ---
 
-### Diapositiva 7: Elasticidad Automática con Horizontal Pod Autoscaler (HPA v2)
-- **Visual en Canva:** Ecuación matemática del escalado dinámico de pods, gráfica de escalado de 2 a 8 réplicas bajo carga y explicación de los umbrales de enfriamiento (*stabilization window*).
-- **Tiempo:** 1 minuto (07:00 - 08:00).
+### Diapositiva 10: Observabilidad de Infraestructura: Modelo USE
+- **Visual en Canva:** Paneles del Modelo USE mostrando Utilization (CPU/RAM cAdvisor), Saturation (presión de memoria cgroups) y Errors (restarts de pods y alertas de nodo >85%).
+- **Tiempo:** 50 segundos (08:25 - 09:15).
+- **Orador:** Valeria Ortiz.
+
+> **Valeria:**  
+> *"En paralelo, implementamos el **Modelo USE**, orientado al hardware y la salud física de los nodos:*  
+>  
+> *- **Utilization (Utilización):** Prometheus consulta a cAdvisor cada 15 segundos para registrar el consumo porcentual de CPU, memoria y almacenamiento en cada nodo y pod del clúster.*  
+> *- **Saturation (Saturación):** Monitoreamos las colas de procesamiento del sistema operativo y la presión de memoria en los límites cgroups.*  
+> *- **Errors (Errores de Infraestructura):** Detectamos eventos de reinicios inesperados de contenedores, fallos de montaje de volúmenes persistentes y caídas por falta de memoria (OOMKilled).*  
+>  
+> *Alertmanager vigila que si la utilización de CPU del nodo supera el 85%, el equipo de infraestructura reciba una notificación proactiva antes de que el usuario lo note."*
+
+---
+
+### Diapositiva 11: Trazabilidad Distribuida E2E y Correlación de Logs
+- **Visual en Canva:** Diagrama del flujo de telemetría: Logstash (TCP 5000) $\rightarrow$ Elasticsearch 8.17 $\rightarrow$ Kibana 5601 correlacionado con OpenTelemetry Collector (4317/4318) y Jaeger All-in-One (16686).
+- **Tiempo:** 55 segundos (09:15 - 10:10).
+- **Orador:** Valeria Ortiz.
+
+> **Valeria:**  
+> *"El verdadero valor de la observabilidad reside en la **correlación distribuida**. Un log aislado o una gráfica solitaria no resuelven incidentes complejos.*  
+>  
+> *Implementamos un pipeline de dos vías:*  
+> *1. **Logging Centralizado:** El backend despacha registros estructurados en JSON a través de sockets TCP 5000 hacia Logstash, el cual los enriquece y almacena en índices diarios de Elasticsearch 8.17, visualizables desde Kibana.*  
+> *2. **Trazabilidad Distribuida:** El SDK de OpenTelemetry inyecta la cabecera estándar W3C `traceparent`. Las trazas viajan por gRPC hacia el OpenTelemetry Collector y se almacenan en Jaeger.*  
+>  
+> *Si un documento falla en Kibana, el analista copia el `traceId` y lo pega en Jaeger: en pantalla aparece el árbol de ejecución completo con el tiempo exacto que tomó el Ingress, el controlador Java y la consulta SQL en PostgreSQL."*
+
+---
+
+### Diapositiva 12: Elasticidad Automática con HPA v2
+- **Visual en Canva:** Ecuación matemática del Horizontal Pod Autoscaler, gráfica de escalado dinámico de 2 a 8 réplicas y explicación de la ventana de estabilización de 180 segundos.
+- **Tiempo:** 55 segundos (10:10 - 11:05).
 - **Orador:** Santiago Gómez Robledo.
 
 > **Santiago:**  
-> *"Para soportar los picos impredecibles de procesamiento de documentos implementamos el **Horizontal Pod Autoscaler v2** conectado a `metrics-server`.*  
+> *"Para que la plataforma soporte cargas impredecibles de procesamiento documental sin desperdiciar recursos computacionales, configuramos el **Horizontal Pod Autoscaler (HPA v2)** conectado al `metrics-server`.*  
 >  
-> *El HPA opera bajo una estricta formulación matemática:*  
+> *El HPA evalúa la métrica bajo su rigurosa formulación matemática:*  
 > $$\text{Replicas Deseadas} = \left\lceil \text{Replicas Actuales} \times \left( \frac{\text{Métrica Actual}}{\text{Métrica Objetivo}} \right) \right\rceil$$  
 >  
-> *Establecimos un piso mínimo de 2 réplicas para alta disponibilidad y un techo elástico de hasta 8 réplicas, con un target del 70% de utilización de CPU.*  
->  
-> *Un aspecto crítico de ingeniería fue configurar la ventana de estabilización (*stabilization window*) de 180 segundos en el escalado hacia abajo. Esto evita el fenómeno de 'aleteo' o *flapping*, donde un pod se crea y se destruye continuamente ante fluctuaciones de tráfico momentáneas, protegiendo la estabilidad del clúster y la vida útil de los contenedores."*
+> *- **Límites de Operación:** Establecimos un piso de 2 réplicas para alta disponibilidad y un techo elástico de 8 réplicas.*  
+> *- **Umbral de Disparo:** Se activa cuando el promedio de consumo de CPU de los pods supera el 70%.*  
+> *- **Ventana de Estabilización:** Fijamos una ventana de enfriamiento de 180 segundos para el escalado descendente. Esto elimina el fenómeno de 'aleteo' (*flapping*), evitando que los pods se creen y destruyan constantemente ante picos momentáneos de tráfico."*
 
 ---
 
-### Diapositiva 8: Gobierno Financiero FinOps con Kubecost
-- **Visual en Canva:** Captura del dashboard de Kubecost 2.8.7 mostrando la atribución de costos por Namespace y el cálculo del Unit Economics de $0.0014 USD por documento procesado.
-- **Tiempo:** 1 minuto (08:00 - 09:00).
+### Diapositiva 13: Gobierno Financiero y FinOps con Kubecost
+- **Visual en Canva:** Captura de Kubecost 2.8.7 mostrando la atribución de costos por Namespace y el cálculo del Unit Economics de $0.0014 USD por documento procesado.
+- **Tiempo:** 55 segundos (11:05 - 12:00).
 - **Orador:** Valeria Ortiz.
 
 > **Valeria:**  
-> *"En una startup tecnológica, una arquitectura puede ser técnicamente brillante, pero si no es económicamente sostenible, la empresa quiebra. Por eso integramos **Kubecost 2.8.7** en el namespace `docuprocess-finops`.*  
+> *"En el desarrollo de software SaaS contemporáneo, la excelencia técnica debe ir acompañada de sostenibilidad financiera. Por ello desplegamos **Kubecost 2.8.7** en el namespace `docuprocess-finops`:*  
 >  
-> *Kubecost nos proporciona tres ventajas competitivas:*  
-> *1. **Atribución de Costos en Tiempo Real:** Sabemos exactamente cuántos dólares gasta cada microservicio en CPU, RAM y almacenamiento persistente (PVC).*  
-> *2. **Detección de Desperdicio:** Permite identificar sobredimensionamiento de recursos para ajustar los *requests* y *limits* de memoria.*  
-> *3. **Unit Economics (Economía Unitaria):** Logramos calcular el costo computacional marginal por documento procesado, el cual se sitúa en **$0.0014 USD**. Esto le permite al equipo de negocio fijar planes de suscripción mensuales con márgenes de ganancia superiores al 75% garantizados por la infraestructura."*
+> *- **Atribución de Costos en Tiempo Real:** Medimos el gasto exacto en dólares de CPU, memoria y almacenamiento persistente (PVC) desglosado por Namespace y Pod.*  
+> *- **Detección de Desperdicio:** Identificamos sobredimensionamiento de recursos para calibrar los *requests* y *limits* de cómputo.*  
+> *- **Unit Economics (Economía Unitaria):** Logramos calcular el costo computacional marginal por documento procesado, el cual se sitúa en **$0.0014 USD**. Esto le permite al área financiera de la startup diseñar planes de suscripción con márgenes brutos de ganancia superiores al 75% respaldados matemáticamente por la infraestructura."*
 
 ---
 
-### Diapositiva 9: Despliegue Progresivo: Estrategia Canary Deployment
+### Diapositiva 14: Despliegue Progresivo: Estrategia Canary Deployment
 - **Visual en Canva:** Diagrama del NGINX Ingress dividiendo el tráfico 90% hacia `docuprocess-backend-stable` (v1.0.0) y 10% hacia `docuprocess-backend-canary` (v2.0.0), junto con la cabecera `X-Canary-Test: always`.
-- **Tiempo:** 1 minuto (09:00 - 10:00).
+- **Tiempo:** 1 minuto (12:00 - 13:00).
 - **Orador:** Santiago Gómez Robledo.
 
 > **Santiago:**  
-> *"El último gran pilar de ingeniería es la entrega continua sin riesgo. En vez de aplicar despliegues de reemplazo total tipo 'Big Bang' —donde un bug oculto afecta al 100% de los usuarios—, implementamos una estrategia de **Canary Deployment** administrada por el Ingress Controller.*  
+> *"Para actualizar la plataforma sin riesgo de interrupción del negocio, implementamos la estrategia de **Canary Deployment** directamente en el Ingress Controller:*  
 >  
-> *El tráfico se divide de forma ponderada:*  
-> *- El **90%** se enruta hacia la versión probada `v1.0.0` (Stable).*  
-> *- El **10%** se deriva hacia la nueva versión `v2.0.0` (Canary).*  
->  
-> *Adicionalmente, incorporamos una regla de enrutamiento determinista por cabecera HTTP: enviando `X-Canary-Test: always`, el equipo de QA o ciertos usuarios VIP son dirigidos siempre a la versión Canary para validar nuevas funcionalidades en producción real sin tocar a los demás clientes.*  
->  
-> *Y ante cualquier anomalía de latencia o errores, el procedimiento de rollback toma exactamente dos segundos: fijamos el peso en 0 en el Ingress y escalamos el Canary a cero réplicas."*
+> *- **División Ponderada:** El 90% de las solicitudes se canaliza hacia la versión probada `v1.0.0` (Stable), mientras que el 10% se deriva a la nueva versión `v2.0.0` (Canary).*  
+> *- **Enrutamiento por Cabecera:** Mediante la cabecera `X-Canary-Test: always`, el equipo de QA o usuarios de prueba pueden interactuar de forma determinista con la versión Canary en el entorno de producción sin afectar al resto de los clientes.*  
+> *- **Validación Estadística:** Ejecutamos pruebas con lotes de 100 solicitudes concurrentes confirmando una distribución real del 88% Stable y 12% Canary sin pérdida de paquetes.*  
+> *- **Rollback Inmediato:** Si la versión Canary presenta fallos, el rollback toma exactamente dos segundos: fijamos el peso en 0 en la anotación del Ingress y escalamos el Canary a cero réplicas."*
 
 ---
 
-### Diapositiva 10: Validación Operativa y Demostración en Vivo (Live Demo)
-- **Visual en Canva:** Esquema secuencial de los 6 pasos de la demostración en vivo (Frontend, Kibana, Jaeger, Grafana, HPA y script E2E).
-- **Tiempo:** 4 minutos (10:00 - 14:00).
-- **Oradores:** Santiago Gómez Robledo & Valeria Ortiz (Intercalado).
-
-> **Santiago:**  
-> *"A continuación pasaremos a la demostración en vivo de todos los subsistemas integrados en nuestro clúster."*  
-> *(Abre el navegador en `http://app.docuprocess.local`)*  
-> *"Aquí podemos apreciar la interfaz de usuario en React 19 con soporte completo para Dark Mode. Iniciamos sesión mediante Keycloak SSO con nuestro usuario `srobledo`, observando la validación del token y los roles asignados."*
-
-> **Valeria:**  
-> *(Procede a la sección de carga de documentos)*  
-> *"Vamos a realizar la carga de una factura empresarial. Noten que la respuesta es instantánea: el backend devuelve un código 202 con un ID de seguimiento único. Ahora pasemos a Kibana en `http://kibana.docuprocess.local`: aquí vemos el evento indexado en tiempo real con su `tenantId`, tipo de documento y el `traceId` asociado."*
-
-> **Santiago:**  
-> *(Abre Jaeger en `http://jaeger.docuprocess.local`)*  
-> *"Tomamos ese `traceId` y lo consultamos en Jaeger: podemos observar la traza distribuida completa, con el span del Ingress, la llegada al controlador Spring Boot y la consulta SQL en PostgreSQL, midiendo cada milisegundo del trayecto."*
-
-> **Valeria:**  
-> *(Abre Grafana en `http://grafana.docuprocess.local`)*  
-> *"En nuestro Dashboard Unificado de Grafana vemos la correlación en vivo: la primera fila muestra los KPIs de negocio (documentos procesados y tasa de éxito); la segunda fila refleja el Modelo RED con el conteo de peticiones y latencia por versión; y la tercera fila vigila el Modelo USE con la salud de CPU y memoria de los pods."*
-
-> **Santiago:**  
-> *(Ejecuta en consola `./scripts/test-hpa.sh` y `./scripts/e2e-validate.sh`)*  
-> *"Por último, en la terminal inyectamos una ráfaga de solicitudes concurrentes: el HPA detecta el incremento de carga y eleva las réplicas automáticamente. Finalmente, corremos nuestro script de validación integral `./scripts/e2e-validate.sh`, el cual comprueba los 8 criterios de aceptación de la Definition of Done, confirmando un resultado del **100% PASS**."*
-
----
-
-### Diapositiva 11: Conclusiones y Valor Estratégico de Plataformas II
-- **Visual en Canva:** Tres pilares de síntesis: Resiliencia Cloud-Native, Observabilidad con Sentido de Negocio y Eficiencia de Costos FinOps, junto a los agradecimientos finales.
-- **Tiempo:** 1 minuto (14:00 - 15:00).
+### Diapositiva 15: Validación Operativa (Live Demo) y Conclusiones
+- **Visual en Canva:** Esquema de los 6 pasos de la demostración en vivo (Keycloak $\rightarrow$ React 19 $\rightarrow$ ELK $\rightarrow$ Jaeger $\rightarrow$ Grafana $\rightarrow$ HPA $\rightarrow$ DoD 100%) y conclusiones de ingeniería.
+- **Tiempo:** 2 minutos (13:00 - 15:00).
 - **Oradores:** Santiago Gómez Robledo & Valeria Ortiz.
 
+> **Santiago:**  
+> *"Para concluir la exposición, demostraremos en vivo la operación de los subsistemas en nuestro clúster Minikube:"*  
+> *(Abre `http://app.docuprocess.local`)*  
+> *"Iniciamos sesión en el Frontend React 19 a través de Keycloak SSO con nuestro usuario `srobledo`."*
+
 > **Valeria:**  
-> *"Para cerrar, este proyecto nos deja tres aprendizajes fundamentales de ingeniería:*  
-> *1. La observabilidad moderna no consiste en acumular tableros gráficos, sino en conectar cada métrica técnica con el valor y la experiencia de los clientes del negocio.*  
-> *2. La seguridad no se añade al final: implementar Zero-Trust a nivel de kernel con NetworkPolicies desde el día uno evita brechas de seguridad masivas en entornos multi-tenant.*  
-> *3. El modelo FinOps transforma al ingeniero de plataformas en un actor clave para la rentabilidad de la compañía."*
+> *(Ejecuta la ingesta de un documento)*  
+> *"Subimos una factura corporativa y recibimos instantáneamente el código 202 con su tracking UUID. En Kibana (`http://kibana.docuprocess.local`) vemos el log estructurado con su `traceId`. En Jaeger (`http://jaeger.docuprocess.local`) inspeccionamos la traza distribuida a través de todos los microservicios. Y en Grafana (`http://grafana.docuprocess.local`) confirmamos en tiempo real los tableros de los modelos RED y USE."*
 
 > **Santiago:**  
-> *"Agradecemos al profesor y a nuestros compañeros por su atención durante este semestre en **Plataformas II**. Quedamos a su entera disposición para responder cualquier pregunta técnica sobre la arquitectura o los componentes desplegados. ¡Muchas gracias!"*
+> *(Ejecuta `./scripts/e2e-validate.sh` en la terminal)*  
+> *"En consola ejecutamos nuestro script de validación integral `./scripts/e2e-validate.sh`: como pueden observar, los 8 criterios de la Definition of Done arrojan un resultado del **100% PASS**.*  
+>  
+> *Este proyecto nos demuestra que la ingeniería de plataformas moderna no es solo aprovisionar infraestructura, sino crear un ecosistema observable, seguro y económicamente viable. Agradecemos al profesor y compañeros por su atención en este curso de **Plataformas II**. ¡Muchas gracias y quedamos atentos a sus preguntas!"*
 
 ---
 

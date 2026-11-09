@@ -276,8 +276,8 @@ minikube stop    # Para pausar
 
 En la carpeta [`docs/`](docs/) se encuentran los entregables detallados para la sustentación ante el docente y compañeros:
 
-- **Presentación Oficial en Canva (11 Diapositivas):** [https://canva.link/ei6fwopawpoey6r](https://canva.link/ei6fwopawpoey6r) *(Edición directa: [canva.com/d/8M04aX33msDShbP](https://www.canva.com/d/8M04aX33msDShbP))*.
-- **Libreto Diapositiva por Diapositiva:** [`docs/LIBRETO_SUSTENTACION_CANVA.md`](docs/LIBRETO_SUSTENTACION_CANVA.md) (Guion técnico y tiempos calibrados para Santiago Gómez Robledo y Valeria Ortiz).
-- **Estructura de Diapositivas:** [`docs/PRESENTATION_SLIDES.md`](docs/PRESENTATION_SLIDES.md) (11 diapositivas completas con caso de negocio, arquitectura y conclusiones).
+- **Presentación Oficial en Canva (15 Diapositivas):** [https://canva.link/ve9c8uf8ocmz5mm](https://canva.link/ve9c8uf8ocmz5mm) *(Edición directa: [canva.com/d/JmcueBf0Uv6Md3z](https://www.canva.com/d/JmcueBf0Uv6Md3z))*.
+- **Libreto Diapositiva por Diapositiva (15 Diapositivas):** [`docs/LIBRETO_SUSTENTACION_CANVA.md`](docs/LIBRETO_SUSTENTACION_CANVA.md) (Guion técnico y tiempos calibrados para Santiago Gómez Robledo y Valeria Ortiz).
+- **Estructura de Diapositivas (15 Diapositivas):** [`docs/PRESENTATION_SLIDES.md`](docs/PRESENTATION_SLIDES.md) (15 diapositivas completas con caso de negocio, arquitectura, FinOps, SRE y conclusiones).
 - **Guion Minuto a Minuto:** [`docs/GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md`](docs/GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md) (Distribución de intervenciones con simulación de preguntas docentes).
 - **Runbook Técnico:** [`docs/RUNBOOK.md`](docs/RUNBOOK.md) (Manual de ingeniería y resolución de fallos).
