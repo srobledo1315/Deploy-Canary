@@ -1,0 +1,69 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  application:
+    name: docuprocess-backend
+  profiles:
+    active: default
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgresql-service.docuprocess-data.svc.cluster.local:5432/docuprocess_db}
+    username: ${SPRING_DATASOURCE_USERNAME:docuadmin}
+    password: ${SPRING_DATASOURCE_PASSWORD:DocuProcessSecure2026!}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 3
+      idle-timeout: 30000
+      connection-timeout: 20000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://keycloak-service.docuprocess-security.svc.cluster.local:8080/realms/docuprocess-enterprise}
+          jwk-set-uri: ${KEYCLOAK_JWK_SET_URI:http://keycloak-service.docuprocess-security.svc.cluster.local:8080/realms/docuprocess-enterprise/protocol/openid-connect/certs}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      version: ${APP_VERSION:1.0.0}
+      environment: ${APP_ENV:production}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+        docuprocess.processing.duration: true
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://otel-collector-service.docuprocess-monitoring.svc.cluster.local:4318/v1/traces}
+
+docuprocess:
+  version: ${APP_VERSION:1.0.0}
+  storage:
+    path: ${STORAGE_PATH:/data/storage}
+  logstash:
+    host: ${LOGSTASH_HOST:logstash-service.docuprocess-logging.svc.cluster.local}
+    port: ${LOGSTASH_PORT:5000}

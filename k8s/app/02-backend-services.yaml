@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: docuprocess-backend-service
+  namespace: docuprocess-app
+  labels:
+    app.kubernetes.io/name: docuprocess-backend
+    app.kubernetes.io/part-of: docuprocess-cloud
+    track: stable
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: docuprocess-backend
+    track: stable
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docuprocess-canary-service
+  namespace: docuprocess-app
+  labels:
+    app.kubernetes.io/name: docuprocess-backend
+    app.kubernetes.io/part-of: docuprocess-cloud
+    track: canary
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: docuprocess-backend
+    track: canary

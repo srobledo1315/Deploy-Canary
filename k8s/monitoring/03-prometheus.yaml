@@ -1,0 +1,261 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus-sa
+  namespace: docuprocess-monitoring
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus-cluster-role
+rules:
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - nodes/metrics
+      - nodes/proxy
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+  - apiGroups:
+      - "extensions"
+      - "apps"
+    resources:
+      - daemonsets
+      - statefulsets
+      - deployments
+    verbs: ["get", "list", "watch"]
+  - nonResourceURLs: ["/metrics", "/metrics/cadvisor"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus-cluster-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-cluster-role
+subjects:
+  - kind: ServiceAccount
+    name: prometheus-sa
+    namespace: docuprocess-monitoring
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-rules
+  namespace: docuprocess-monitoring
+  labels:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: docuprocess-cloud
+data:
+  alert-rules.yml: |
+    groups:
+      - name: docuprocess-red-rules
+        rules:
+          - alert: DocuProcessHighErrorRate
+            expr: (sum(rate(http_server_requests_seconds_count{status=~"5.."}[2m])) / sum(rate(http_server_requests_seconds_count[2m]))) * 100 > 2
+            for: 1m
+            labels:
+              severity: critical
+              model: RED
+            annotations:
+              summary: "High HTTP 5xx error rate detected in DocuProcess API"
+              description: "HTTP 5xx error rate is {{ $value | printf \"%.2f\" }}% over the last 2 minutes."
+
+          - alert: DocuProcessHighAsyncLatencyP99
+            expr: histogram_quantile(0.99, sum(rate(http_server_requests_seconds_bucket{uri=~".*process.*"}[2m])) by (le)) > 2.5
+            for: 1m
+            labels:
+              severity: warning
+              model: RED
+            annotations:
+              summary: "P99 latency exceeding threshold for asynchronous processing"
+              description: "P99 document processing latency is {{ $value | printf \"%.2f\" }} seconds (threshold: 2.5s)."
+
+      - name: docuprocess-use-rules
+        rules:
+          - alert: NodeHighCpuUtilization
+            expr: (1 - avg(rate(node_cpu_seconds_total{mode="idle"}[3m]))) * 100 > 85
+            for: 2m
+            labels:
+              severity: critical
+              model: USE
+            annotations:
+              summary: "Host CPU utilization critical"
+              description: "Host CPU utilization is {{ $value | printf \"%.2f\" }}%."
+
+          - alert: PodCrashLooping
+            expr: increase(kube_pod_container_status_restarts_total[10m]) > 3
+            for: 1m
+            labels:
+              severity: warning
+              model: USE
+            annotations:
+              summary: "Pod restarting frequently"
+              description: "Pod {{ $labels.pod }} restarted more than 3 times in 10 minutes."
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: docuprocess-monitoring
+  labels:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: docuprocess-cloud
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+
+    rule_files:
+      - /etc/prometheus-rules/alert-rules.yml
+
+    alerting:
+      alertmanagers:
+        - static_configs:
+            - targets: ['alertmanager-service.docuprocess-monitoring.svc.cluster.local:9093']
+
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+
+      - job_name: 'docuprocess-backend'
+        metrics_path: '/actuator/prometheus'
+        scrape_interval: 5s
+        static_configs:
+          - targets:
+              - 'docuprocess-backend-service.docuprocess-app.svc.cluster.local:8080'
+              - 'docuprocess-canary-service.docuprocess-app.svc.cluster.local:8080'
+
+      - job_name: 'keycloak'
+        metrics_path: '/metrics'
+        static_configs:
+          - targets:
+              - 'keycloak-service.docuprocess-security.svc.cluster.local:9000'
+
+      - job_name: 'kubernetes-cadvisor'
+        scheme: https
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        kubernetes_sd_configs:
+          - role: node
+        relabel_configs:
+          - action: labelmap
+            regex: __meta_kubernetes_node_label_(.+)
+          - target_label: __address__
+            replacement: kubernetes.default.svc:443
+          - source_labels: [__meta_kubernetes_node_name]
+            regex: (.+)
+            target_label: __metrics_path__
+            replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+
+      - job_name: 'kubernetes-pods'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+            action: replace
+            target_label: __metrics_path__
+            regex: (.+)
+          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+            action: replace
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: $1:$2
+            target_label: __address__
+          - action: labelmap
+            regex: __meta_kubernetes_pod_label_(.+)
+          - source_labels: [__meta_kubernetes_namespace]
+            action: replace
+            target_label: kubernetes_namespace
+          - source_labels: [__meta_kubernetes_pod_name]
+            action: replace
+            target_label: kubernetes_pod_name
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: docuprocess-monitoring
+  labels:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/component: metrics-engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prometheus
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: prometheus
+        app.kubernetes.io/part-of: docuprocess-cloud
+        app.kubernetes.io/component: metrics-engine
+    spec:
+      serviceAccountName: prometheus-sa
+      containers:
+        - name: prometheus
+          image: prom/prometheus:v3.2.0
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus"
+            - "--web.enable-lifecycle"
+            - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+            - "--web.console.templates=/usr/share/prometheus/consoles"
+          ports:
+            - name: web
+              containerPort: 9090
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: 9090
+            initialDelaySeconds: 15
+            periodSeconds: 5
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/prometheus
+            - name: rules-volume
+              mountPath: /etc/prometheus-rules
+      volumes:
+        - name: config-volume
+          configMap:
+            name: prometheus-config
+        - name: rules-volume
+          configMap:
+            name: prometheus-rules
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+  namespace: docuprocess-monitoring
+  labels:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/component: metrics-engine
+spec:
+  type: ClusterIP
+  ports:
+    - name: web
+      port: 9090
+      targetPort: 9090
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: prometheus

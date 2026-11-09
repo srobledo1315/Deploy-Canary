@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana
+  namespace: docuprocess-logging
+  labels:
+    app.kubernetes.io/name: kibana
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/component: log-visualizer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kibana
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kibana
+        app.kubernetes.io/part-of: docuprocess-cloud
+        app.kubernetes.io/component: log-visualizer
+    spec:
+      containers:
+        - name: kibana
+          image: docker.elastic.co/kibana/kibana:8.17.2
+          ports:
+            - name: http
+              containerPort: 5601
+              protocol: TCP
+          env:
+            - name: ELASTICSEARCH_HOSTS
+              value: "http://elasticsearch-service.docuprocess-logging.svc.cluster.local:9200"
+            - name: SERVER_NAME
+              value: "kibana.docuprocess.local"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 384Mi
+            limits:
+              cpu: 800m
+              memory: 768Mi
+          readinessProbe:
+            httpGet:
+              path: /api/status
+              port: 5601
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-service
+  namespace: docuprocess-logging
+  labels:
+    app.kubernetes.io/name: kibana
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/component: log-visualizer
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 5601
+      targetPort: 5601
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: kibana

@@ -65,13 +65,15 @@ spec:
               value: "auth.docuprocess.local"
             - name: KC_PROXY_HEADERS
               value: "xforwarded"
+            - name: JAVA_OPTS_KC_BUILD
+              value: "-Xms512m -Xmx1024m"
           resources:
             requests:
               cpu: 300m
               memory: 512Mi
             limits:
-              cpu: 1500m
-              memory: 1024Mi
+              cpu: 2000m
+              memory: 2048Mi
           readinessProbe:
             httpGet:
               path: /health/ready

@@ -1,0 +1,170 @@
+# -------------------------------------------------------------
+# Zero-Trust Network Policies for DocuProcess Cloud (L3/L4 Isolation)
+# -------------------------------------------------------------
+
+# 1. Default Deny All in docuprocess-app
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-app
+  namespace: docuprocess-app
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+# 2. Allow Core DNS for all pods in docuprocess-app
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-kube-dns-app
+  namespace: docuprocess-app
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+---
+# 3. Allow Ingress Traffic to Frontend Pods
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-ingress
+  namespace: docuprocess-app
+spec:
+  podSelector:
+    matchLabels:
+      app: docuprocess-frontend
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 80
+---
+# 4. Allow Ingress & Egress for Backend (Stable & Canary)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backend-traffic
+  namespace: docuprocess-app
+spec:
+  podSelector:
+    matchLabels:
+      app: docuprocess-backend
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # Allow from Ingress NGINX
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8080
+    # Allow from Frontend Pods
+    - from:
+        - podSelector:
+            matchLabels:
+              app: docuprocess-frontend
+      ports:
+        - protocol: TCP
+          port: 8080
+    # Allow Prometheus Scraper
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: docuprocess-monitoring
+      ports:
+        - protocol: TCP
+          port: 8080
+  egress:
+    # Allow PostgreSQL (TCP 5432 in docuprocess-data)
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: docuprocess-data
+      ports:
+        - protocol: TCP
+          port: 5432
+    # Allow Keycloak SSO (TCP 8080 in docuprocess-security)
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: docuprocess-security
+      ports:
+        - protocol: TCP
+          port: 8080
+    # Allow Logstash (TCP 5000 in docuprocess-logging)
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: docuprocess-logging
+      ports:
+        - protocol: TCP
+          port: 5000
+    # Allow OpenTelemetry Collector (TCP 4318 in docuprocess-monitoring)
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: docuprocess-monitoring
+      ports:
+        - protocol: TCP
+          port: 4318
+---
+# 5. Default Deny All in docuprocess-data
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-data
+  namespace: docuprocess-data
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+# 6. Allow PostgreSQL Ingress strictly from Backend & Keycloak
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-postgres-ingress
+  namespace: docuprocess-data
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: postgresql
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: docuprocess-app
+          podSelector:
+            matchLabels:
+              app: docuprocess-backend
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: docuprocess-security
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: keycloak
+      ports:
+        - protocol: TCP
+          port: 5432

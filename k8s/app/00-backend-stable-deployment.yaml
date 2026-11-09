@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docuprocess-backend-stable
+  namespace: docuprocess-app
+  labels:
+    app.kubernetes.io/name: docuprocess-backend
+    app.kubernetes.io/part-of: docuprocess-cloud
+    app.kubernetes.io/version: "1.0.0"
+    track: stable
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: docuprocess-backend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: docuprocess-backend
+        track: stable
+        version: "1.0.0"
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8080"
+    spec:
+      securityContext:
+        fsGroup: 10001
+        runAsUser: 10001
+        runAsNonRoot: true
+      containers:
+        - name: backend
+          image: docuprocess-backend:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: APP_VERSION
+              value: "1.0.0"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://postgresql-service.docuprocess-data.svc.cluster.local:5432/docuprocess_db"
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: backend-db-secret
+                  key: POSTGRES_USER
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-db-secret
+                  key: POSTGRES_PASSWORD
+            - name: KEYCLOAK_ISSUER_URI
+              value: "http://keycloak-service.docuprocess-security.svc.cluster.local:8080/realms/docuprocess-enterprise"
+            - name: KEYCLOAK_JWK_SET_URI
+              value: "http://keycloak-service.docuprocess-security.svc.cluster.local:8080/realms/docuprocess-enterprise/protocol/openid-connect/certs"
+            - name: STORAGE_PATH
+              value: "/data/storage"
+            - name: LOGSTASH_HOST
+              value: "logstash-service.docuprocess-logging.svc.cluster.local"
+            - name: LOGSTASH_PORT
+              value: "5000"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector-service.docuprocess-monitoring.svc.cluster.local:4318/v1/traces"
+          resources:
+            requests:
+              cpu: 150m
+              memory: 384Mi
+            limits:
+              cpu: 800m
+              memory: 768Mi
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 25
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 35
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          volumeMounts:
+            - name: storage-volume
+              mountPath: /data/storage
+      volumes:
+        - name: storage-volume
+          persistentVolumeClaim:
+            claimName: docuprocess-storage-pvc

@@ -1,0 +1,178 @@
+# -----------------------------------------------------------------
+# NGINX Ingress & Canary Traffic Routing for DocuProcess Cloud
+# -----------------------------------------------------------------
+
+# 1. Frontend Ingress (app.docuprocess.local)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: docuprocess-frontend-ingress
+  namespace: docuprocess-app
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "64m"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: app.docuprocess.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: docuprocess-frontend-service
+                port:
+                  number: 80
+---
+# 2. Stable Backend API Ingress (api.docuprocess.local) - 90% Base Traffic
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: docuprocess-api-stable-ingress
+  namespace: docuprocess-app
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "64m"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,X-Enterprise-Tenant,X-Canary-Test"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.docuprocess.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: docuprocess-backend-service
+                port:
+                  number: 8080
+---
+# 3. Canary Backend API Ingress (api.docuprocess.local) - 10% Weight + Header Override
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: docuprocess-api-canary-ingress
+  namespace: docuprocess-app
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "10"
+    nginx.ingress.kubernetes.io/canary-by-header: "X-Canary-Test"
+    nginx.ingress.kubernetes.io/proxy-body-size: "64m"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.docuprocess.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: docuprocess-canary-service
+                port:
+                  number: 8080
+---
+# 4. Keycloak SSO Ingress (auth.docuprocess.local)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak-ingress
+  namespace: docuprocess-security
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: auth.docuprocess.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak-service
+                port:
+                  number: 8080
+---
+# 5. Grafana Unified Observability (grafana.docuprocess.local)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: docuprocess-monitoring
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: grafana.docuprocess.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana-service
+                port:
+                  number: 3000
+---
+# 6. Kibana Centralized Logging (kibana.docuprocess.local)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kibana-ingress
+  namespace: docuprocess-logging
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: kibana.docuprocess.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kibana-service
+                port:
+                  number: 5601
+---
+# 7. Jaeger Distributed Tracing (jaeger.docuprocess.local)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jaeger-ingress
+  namespace: docuprocess-monitoring
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: jaeger.docuprocess.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jaeger-service
+                port:
+                  number: 16686
+---
+# 8. Kubecost FinOps Dashboard (kubecost.docuprocess.local)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubecost-ingress
+  namespace: docuprocess-finops
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: kubecost.docuprocess.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kubecost-cost-analyzer
+                port:
+                  number: 9090

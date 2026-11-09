@@ -1,0 +1,39 @@
+global:
+  clusterId: "docuprocess-minikube"
+  prometheus:
+    enabled: true
+kubecostToken: "aWNlc2ktZG9jdXByb2Nlc3MtaW5mcmEzCg=="
+kubecostModel:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+kubecostFrontend:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+prometheus:
+  server:
+    global:
+      external_labels:
+        cluster_id: "docuprocess-minikube"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+networkCosts:
+  enabled: false
+serviceMonitor:
+  enabled: false
+prometheusRule:
+  enabled: false

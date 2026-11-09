@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+    <springProperty scope="context" name="appVersion" source="docuprocess.version"/>
+    <springProperty scope="context" name="logstashHost" source="docuprocess.logstash.host"/>
+    <springProperty scope="context" name="logstashPort" source="docuprocess.logstash.port"/>
+
+    <!-- Standard Console Appender with ANSI coloring -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr([${appName},%X{traceId:-},%X{spanId:-}]){yellow} %clr(%logger{36}){cyan} %clr(:){faint} %m%n%wEx</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Asynchronous TCP Logstash Appender sending JSON -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>${logstashHost}:${logstashPort}</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"service":"${appName}","version":"${appVersion}","platform":"kubernetes"}</customFields>
+            <includeMdcKeyName>traceId</includeMdcKeyName>
+            <includeMdcKeyName>spanId</includeMdcKeyName>
+            <includeMdcKeyName>tenantId</includeMdcKeyName>
+            <includeMdcKeyName>documentId</includeMdcKeyName>
+            <includeMdcKeyName>documentType</includeMdcKeyName>
+            <includeMdcKeyName>processingDurationMs</includeMdcKeyName>
+        </encoder>
+        <reconnectionDelay>5000</reconnectionDelay>
+        <waitStrategyType>sleeping</waitStrategyType>
+    </appender>
+
+    <!-- Async wrapper to protect application threads from network latency -->
+    <appender name="ASYNC_LOGSTASH" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="LOGSTASH"/>
+        <queueSize>1024</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <neverBlock>true</neverBlock>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ASYNC_LOGSTASH"/>
+    </root>
+
+    <logger name="com.docuprocess" level="DEBUG"/>
+    <logger name="org.springframework.security" level="INFO"/>
+</configuration>
