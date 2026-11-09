@@ -20,7 +20,7 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("DocuProcess Cloud - Enterprise SaaS API")
-                        .description("Microservicio asíncrono para ingesta, extracción y análisis inteligente de documentos e imágenes. Universidad ICESI - Infraestructura III.")
+                        .description("Microservicio asíncrono para ingesta, extracción y análisis inteligente de documentos e imágenes. Universidad ICESI - Plataformas II.")
                         .version(appVersion)
                         .contact(new Contact().name("DocuProcess Cloud DevOps Team").email("devops@docuprocess.local"))
                         .license(new License().name("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0")))

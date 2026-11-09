@@ -75,7 +75,7 @@
   <g transform="translate(40, 24)">
     <text x="0" y="22" font-size="22" font-weight="800" fill="url(#grad-title)" letter-spacing="-0.3">DocuProcess Cloud — Arquitectura de Infraestructura y Topología de Red Kubernetes</text>
     <text x="0" y="42" font-size="11.5" font-weight="500" fill="#94a3b8">Minikube v1.39.0 • Zero-Trust L3/L4 Network Policies • NGINX Canary (90/10) • Observabilidad RED/USE • Kubecost FinOps</text>
-    <text x="1280" y="22" font-size="12.5" font-weight="700" fill="#cbd5e1" text-anchor="end">Universidad ICESI | Infraestructura III</text>
+    <text x="1280" y="22" font-size="12.5" font-weight="700" fill="#cbd5e1" text-anchor="end">Universidad ICESI | Plataformas II</text>
     <text x="1280" y="40" font-size="11.5" font-weight="600" fill="#38bdf8" text-anchor="end">Santiago Gómez Robledo &amp; Valeria Ortiz</text>
   </g>
 

@@ -1,6 +1,7 @@
 # DocuProcess Cloud — Plataforma SaaS Enterprise
 >
 > **Universidad ICESI** — Facultad de Ingeniería, Diseño y Ciencias Aplicadas  
+> **Curso:** Plataformas II  
 > **Integrantes:** Santiago Gómez Robledo &amp; Valeria Ortiz  
 > **Entorno:** Kubernetes v1.32.0 (Minikube Engine v1.39.0 sobre Containerd)  
 > **Estrategia:** Despliegue Progresivo Canary (NGINX Ingress) • Zero Trust L3/L4 • Observabilidad RED/USE • FinOps (Kubecost)

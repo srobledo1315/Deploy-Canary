@@ -1,5 +1,5 @@
 # Guion de Sustentación — DocuProcess Cloud
-**Asignatura:** Infraestructura III — Universidad ICESI  
+**Asignatura:** Plataformas II — Universidad ICESI  
 **Integrantes:** Santiago Gómez Robledo & Valeria Ortiz  
 **Tiempo Total:** 15 Minutos (10 min Exposición Teórico-Técnica + 5 min Demostración en Vivo)  
 

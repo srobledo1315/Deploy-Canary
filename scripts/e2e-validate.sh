@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Script de Validación Integral Definition of Done (DoD) - DocuProcess Cloud
-# Universidad ICESI - Infraestructura III
+# Universidad ICESI - Plataformas II
 # ==============================================================================
 set -euo pipefail
 
 INGRESS_IP=$(minikube ip)
 echo "=============================================================================="
 echo "      DOCUPROCESS CLOUD - REPORTE DE DEFINITION OF DONE (DoD)"
-echo "                   Universidad ICESI - Infraestructura III"
+echo "                   Universidad ICESI - Plataformas II"
 echo "=============================================================================="
 echo "Ingress IP del Clúster: ${INGRESS_IP}"
 echo "Fecha de Auditoría: $(date)"
