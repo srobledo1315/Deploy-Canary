@@ -46,3 +46,4 @@
     <logger name="com.docuprocess" level="DEBUG"/>
     <logger name="org.springframework.security" level="INFO"/>
 </configuration>
+

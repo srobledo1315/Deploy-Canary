@@ -158,3 +158,4 @@ Si la versión Canary (v2.0.0) presentara una degradación en la tasa de errores
    kubectl scale deployment -n docuprocess-app docuprocess-backend-canary --replicas=0
    ```
 3. El 100% del tráfico enterprise retorna instantáneamente a `docuprocess-backend-stable` sin downtime.
+

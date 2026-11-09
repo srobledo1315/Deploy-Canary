@@ -42,3 +42,4 @@ kubectl get deployment -n docuprocess-app docuprocess-backend-stable
 kubectl get pods -n docuprocess-app -l app=docuprocess-backend,track=stable
 echo "===================================================================="
 echo "Demostración de HPA finalizada."
+

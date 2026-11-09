@@ -55,3 +55,4 @@ if [ "${COUNT_V2}" -gt 0 ]; then
 else
     echo "⚠️ Advertencia: No se registraron peticiones hacia Canary. Verifique peso del Ingress."
 fi
+

@@ -106,3 +106,4 @@ spec:
           configMap:
             name: postgres-init-scripts
             defaultMode: 0755
+

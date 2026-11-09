@@ -15,3 +15,4 @@ class DocuProcessApplicationTests {
         assertTrue(true, "Spring Application Context initialized cleanly.");
     }
 }
+

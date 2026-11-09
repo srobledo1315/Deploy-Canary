@@ -45,3 +45,4 @@ public class DocumentProcessingServiceTest {
                 "Status should transition to SUCCESS or FAILED");
     }
 }
+

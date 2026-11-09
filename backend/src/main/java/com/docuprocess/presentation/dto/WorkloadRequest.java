@@ -17,3 +17,4 @@ public record WorkloadRequest(
         if (simulatedDurationMs == null) simulatedDurationMs = 350L;
     }
 }
+

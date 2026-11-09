@@ -52,3 +52,4 @@ public class MetricsConfig {
         return activeUsersGauge != null ? activeUsersGauge.get() : 0;
     }
 }
+

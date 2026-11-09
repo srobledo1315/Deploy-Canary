@@ -27,3 +27,4 @@ export const getMockEnterpriseProfile = (role: 'TENANT_ADMIN' | 'DOCUMENT_OPERAT
     token: 'mock-jwt-token-icesi-demo'
   };
 };
+

@@ -6,3 +6,4 @@ public enum DocumentStatus {
     SUCCESS,
     FAILED
 }
+

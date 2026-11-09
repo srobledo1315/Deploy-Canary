@@ -67,3 +67,4 @@ docuprocess:
   logstash:
     host: ${LOGSTASH_HOST:logstash-service.docuprocess-logging.svc.cluster.local}
     port: ${LOGSTASH_PORT:5000}
+

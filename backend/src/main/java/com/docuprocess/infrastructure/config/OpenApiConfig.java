@@ -35,3 +35,4 @@ public class OpenApiConfig {
                                         .description("Token JWT emitido por Keycloak 26 (Realm: docuprocess-enterprise)")));
     }
 }
+

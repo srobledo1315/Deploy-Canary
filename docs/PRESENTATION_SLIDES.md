@@ -113,3 +113,4 @@
 - La observabilidad no es instalar herramientas, es correlacionar métricas técnicas con valor de negocio.
 - Los Canary Deployments mitigan el riesgo operativo al limitar el radio de impacto de fallos a solo un 10% de la carga.
 - La gestión de costos (FinOps) es indispensable para la viabilidad financiera de cualquier plataforma SaaS moderna.
+

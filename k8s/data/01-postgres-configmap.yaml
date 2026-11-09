@@ -26,3 +26,4 @@ data:
     EOSQL
 
     echo "PostgreSQL initialization completed successfully."
+

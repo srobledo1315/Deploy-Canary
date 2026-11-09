@@ -89,3 +89,4 @@ spec:
       protocol: TCP
   selector:
     app.kubernetes.io/name: alertmanager
+

@@ -15,3 +15,4 @@ public interface DocumentTaskRepository extends JpaRepository<DocumentTask, UUID
     long countByTenantId(String tenantId);
     long countByStatus(DocumentStatus status);
 }
+
