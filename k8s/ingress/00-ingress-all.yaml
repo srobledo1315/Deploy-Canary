@@ -60,6 +60,7 @@ metadata:
     nginx.ingress.kubernetes.io/canary: "true"
     nginx.ingress.kubernetes.io/canary-weight: "10"
     nginx.ingress.kubernetes.io/canary-by-header: "X-Canary-Test"
+    nginx.ingress.kubernetes.io/canary-by-header-value: "always"
     nginx.ingress.kubernetes.io/proxy-body-size: "64m"
 spec:
   ingressClassName: nginx
