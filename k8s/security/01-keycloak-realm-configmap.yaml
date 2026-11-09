@@ -95,8 +95,8 @@ data:
         {
           "username": "admin@docuprocess.com",
           "email": "admin@docuprocess.com",
-          "firstName": "Enterprise",
-          "lastName": "Admin",
+          "firstName": "Santiago",
+          "lastName": "Gomez Robledo",
           "enabled": true,
           "emailVerified": true,
           "credentials": [
@@ -133,7 +133,7 @@ data:
           "username": "auditor@docuprocess.com",
           "email": "auditor@docuprocess.com",
           "firstName": "Valeria",
-          "lastName": "Auditora",
+          "lastName": "Ortiz",
           "enabled": true,
           "emailVerified": true,
           "credentials": [

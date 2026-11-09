@@ -1,11 +1,11 @@
 # Guion de Sustentación — DocuProcess Cloud
 **Asignatura:** Infraestructura III — Universidad ICESI  
-**Integrantes:** Valeria & Robledo  
+**Integrantes:** Santiago Gómez Robledo & Valeria Ortiz  
 **Tiempo Total:** 15 Minutos (10 min Exposición Teórico-Técnica + 5 min Demostración en Vivo)  
 
 ---
 
-## Minuto 0:00 - 02:00 | Introducción y Caso de Negocio SaaS (Valeria)
+## Minuto 0:00 - 02:00 | Introducción y Caso de Negocio SaaS (Valeria Ortiz)
 
 > **Valeria:**  
 > "Buenas tardes profesor y compañeros. Hoy les presentamos **DocuProcess Cloud**, una plataforma SaaS diseñada para resolver un problema crítico en empresas medianas y grandes: el procesamiento asíncrono y análisis inteligente de grandes volúmenes de documentos, como facturas electrónicas, contratos legales e imágenes de identidad.
@@ -17,13 +17,13 @@
 > 2. **Observabilidad Integral**, no solo para ver si un servidor se calienta, sino para entender el comportamiento de los clientes y la tasa de éxito de los procesos.
 > 3. **Gestión de Costos FinOps**, para saber exactamente cuánto nos cuesta procesar cada documento en la nube.
 > 
-> A continuación, mi compañero Robledo explicará cómo diseñamos la arquitectura y la separación de capas en Kubernetes."
+> A continuación, mi compañero Santiago explicará cómo diseñamos la arquitectura y la separación de capas en Kubernetes."
 
 ---
 
-## Minuto 02:00 - 04:30 | Arquitectura K8s, Aislamiento y Redes L3/L4 (Robledo)
+## Minuto 02:00 - 04:30 | Arquitectura K8s, Aislamiento y Redes L3/L4 (Santiago Gómez Robledo)
 
-> **Robledo:**  
+> **Santiago:**  
 > "Gracias Valeria. Para garantizar alta disponibilidad, aislamiento y portabilidad, desplegamos DocuProcess Cloud sobre un clúster local de Kubernetes Minikube v1.39.0 utilizando únicamente manifiestos declarativos nativos, sin depender de Terraform.
 > 
 > Diseñamos una estricta separación de **Plano de Control** y **Plano de Datos** distribuida en 6 espacios de nombres lógicos:
@@ -38,7 +38,7 @@
 
 ---
 
-## Minuto 04:30 - 06:30 | Identidad Enterprise SSO y Control de Roles (Valeria)
+## Minuto 04:30 - 06:30 | Identidad Enterprise SSO y Control de Roles (Valeria Ortiz)
 
 > **Valeria:**  
 > "En el ámbito de la seguridad de aplicación, los clientes corporativos exigen ir más allá de un simple usuario y contraseña. Implementamos **Keycloak 26** como proveedor de identidad federado mediante el protocolo OpenID Connect (OIDC).
@@ -52,9 +52,9 @@
 
 ---
 
-## Minuto 06:30 - 09:30 | Observabilidad RED/USE, FinOps y Despliegue Canary (Robledo)
+## Minuto 06:30 - 09:30 | Observabilidad RED/USE, FinOps y Despliegue Canary (Santiago Gómez Robledo)
 
-> **Robledo:**  
+> **Santiago:**  
 > "Para la observabilidad, implementamos un modelo de telemetría de 4 capas correlacionadas:
 > 1. En la capa de infraestructura, aplicamos el **Modelo USE** (Utilización, Saturación y Errores): Prometheus recolecta métricas de cAdvisor para vigilar la CPU, memoria y presión de disco. Alertmanager cuenta con reglas activas si el uso de CPU supera el 85%.
 > 2. En la capa de aplicación, aplicamos el **Modelo RED** (Rate, Errors, Duration): Micrometer y Actuator exportan la tasa de peticiones por segundo, la tasa de errores HTTP 5xx y la latencia del procesamiento asíncrono con percentiles $P_{50}, P_{95}$ y $P_{99}$.
@@ -65,7 +65,7 @@
 
 ---
 
-## Minuto 09:30 - 14:00 | Demostración en Vivo / Live Demo (Valeria & Robledo en conjunto)
+## Minuto 09:30 - 14:00 | Demostración en Vivo / Live Demo (Valeria Ortiz & Santiago Gómez Robledo)
 
 > **Valeria:**  
 > *(Mostrando el navegador en `http://app.docuprocess.local`)*  
@@ -73,7 +73,7 @@
 > 
 > Procedo a cargar una factura electrónica de prueba. Al darle 'Iniciar Procesamiento', el frontend envía el archivo, recibe inmediatamente el estado `QUEUED`, y en pantalla una barra de progreso refleja la ejecución asíncrona. Una vez completado, el estado pasa a `SUCCESS` con una duración de 380 milisegundos y podemos abrir el JSON con los metadatos y el hash criptográfico del OCR."
 
-> **Robledo:**  
+> **Santiago:**  
 > *(Pasando a la terminal y dashboards)*  
 > "Ahora veamos qué ocurrió por debajo en la infraestructura:
 > 1. Primero, ejecutamos nuestro script de verificación del Canary: `./scripts/verify-canary.sh 100`. Como pueden observar en pantalla, de 100 peticiones enviadas a `api.docuprocess.local`, exactamente 88 fueron a v1.0.0 y 12 a la versión Canary v2.0.0, con 0% de errores.
@@ -84,7 +84,7 @@
 
 ---
 
-## Minuto 14:00 - 15:00 | Conclusiones y Cierre (Valeria)
+## Minuto 14:00 - 15:00 | Conclusiones y Cierre (Valeria Ortiz)
 
 > **Valeria:**  
 > "Para concluir, este proyecto demuestra cómo la ingeniería de infraestructura moderna cierra la brecha entre el desarrollo de software y la viabilidad empresarial. No solo logramos una plataforma escalable, segura y observable, sino que dotamos a la organización de herramientas para tomar decisiones basadas en datos de rendimiento y costo.

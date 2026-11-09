@@ -1,6 +1,6 @@
 # DocuProcess Cloud — Manual Técnico y Runbook de Operaciones
 **Curso:** Infraestructura III — Universidad ICESI  
-**Autores:** Equipo de Infraestructura y DevOps (Valeria & Robledo)  
+**Autores:** Equipo de Infraestructura y DevOps (Santiago Gómez Robledo & Valeria Ortiz)  
 **Entorno:** Kubernetes v1.32.0 (Minikube v1.39.0 Engine)  
 **Estrategia:** Despliegue Progresivo Canary (NGINX Ingress) sin Terraform  
 
@@ -158,4 +158,12 @@ Si la versión Canary (v2.0.0) presentara una degradación en la tasa de errores
    kubectl scale deployment -n docuprocess-app docuprocess-backend-canary --replicas=0
    ```
 3. El 100% del tráfico enterprise retorna instantáneamente a `docuprocess-backend-stable` sin downtime.
+
+---
+
+## 6. Recursos de Sustentación para la Entrega Final
+
+- **Estructura de Diapositivas:** [`PRESENTATION_SLIDES.md`](file:///home/robledo/Deploy-Canary/docs/PRESENTATION_SLIDES.md)
+- **Guion de Exposición para Santiago Gómez Robledo & Valeria Ortiz:** [`GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md`](file:///home/robledo/Deploy-Canary/docs/GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md)
+- **Suite de Validación DoD:** [`scripts/e2e-validate.sh`](file:///home/robledo/Deploy-Canary/scripts/e2e-validate.sh)
 

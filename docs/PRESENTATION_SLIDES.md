@@ -1,7 +1,7 @@
 # Estructura de Diapositivas para la Sustentación Final
 **Proyecto:** DocuProcess Cloud — Plataforma SaaS con Observabilidad Integral y Despliegue Progresivo  
 **Asignatura:** Infraestructura III — Universidad ICESI  
-**Expositores:** Valeria & Robledo  
+**Expositores:** Santiago Gómez Robledo & Valeria Ortiz  
 **Tiempo Estimado:** 15 - 20 minutos (10 min presentación + 5-10 min demo en vivo)  
 
 ---
@@ -9,7 +9,7 @@
 ### Diapositiva 1: Portada & Presentación Ejecutiva
 - **Título:** DocuProcess Cloud: Plataforma SaaS Enterprise con Observabilidad Integral, FinOps y Despliegue Canary en Kubernetes.
 - **Subtítulo:** Caso de estudio para procesamiento asíncrono de documentos e imágenes corporativas.
-- **Autores:** Valeria & Robledo.
+- **Autores:** Santiago Gómez Robledo & Valeria Ortiz.
 - **Curso:** Infraestructura III — Departamento de TIC — Universidad ICESI.
 - **Punto Clave:** Demostración práctica de cómo la infraestructura moderna no solo sostiene el código, sino que protege la economía del negocio y garantiza continuidad 24/7.
 
