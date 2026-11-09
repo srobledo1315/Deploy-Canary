@@ -255,3 +255,4 @@ En la carpeta [`docs/`](docs/) se encuentran los entregables detallados para la 
 - **Estructura de Diapositivas:** [`docs/PRESENTATION_SLIDES.md`](docs/PRESENTATION_SLIDES.md) (11 diapositivas completas con caso de negocio, arquitectura y conclusiones).
 - **Guion Minuto a Minuto:** [`docs/GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md`](docs/GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md) (Distribución exacta de intervenciones entre Valeria Ortiz y Santiago Gómez Robledo).
 - **Runbook Técnico:** [`docs/RUNBOOK.md`](docs/RUNBOOK.md) (Manual de ingeniería y resolución de fallos).
+
