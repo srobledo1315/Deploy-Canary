@@ -161,7 +161,30 @@ Si la versión Canary (v2.0.0) presentara una degradación en la tasa de errores
 
 ---
 
-## 6. Recursos de Sustentación para la Entrega Final
+## 6. Procedimientos de Apagado y Desmantelamiento (Teardown)
+
+### 6.1. Apagado Ordenado Conservando Datos (Recomendado)
+Para apagar Minikube liberando 14 GiB de RAM y 8 vCPUs del host físico sin perder las bases de datos ni configuraciones:
+
+```bash
+minikube stop
+```
+
+Para reiniciar el clúster conservando todos los datos:
+```bash
+minikube start
+```
+
+### 6.2. Desmantelamiento y Limpieza Completa
+Para eliminar todos los recursos de Kubernetes de manera ordenada respetando dependencias inversas:
+
+```bash
+./scripts/teardown.sh
+```
+
+---
+
+## 7. Recursos de Sustentación para la Entrega Final
 
 - **Estructura de Diapositivas:** [`PRESENTATION_SLIDES.md`](file:///home/robledo/Deploy-Canary/docs/PRESENTATION_SLIDES.md)
 - **Guion de Exposición para Santiago Gómez Robledo & Valeria Ortiz:** [`GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md`](file:///home/robledo/Deploy-Canary/docs/GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md)

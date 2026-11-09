@@ -206,7 +206,73 @@ Si la versión Canary (`v2.0.0`) presenta un incremento en la tasa de errores o 
 
 ---
 
-## 8. Documentación Académica y Recursos para la Sustentación
+## 8. Apagado y Desmantelamiento del Entorno
+
+Dependiendo del objetivo operativo, seleccione el modo de apagado adecuado:
+
+### Modo A: Apagado Ordenado Conservando Datos (Recomendado entre Sesiones)
+
+Este modo detiene el motor de Minikube de forma limpia mediante señales `SIGTERM`, desacopla los volúmenes sin corrupción, libera el 100% de la CPU (8 vCPUs) y la memoria RAM (14 GiB) del host físico, y **preserva intactos** todos los datos de PostgreSQL, índices de Elasticsearch, configuraciones de Keycloak y dashboards de Grafana:
+
+```bash
+# Apagar el clúster de forma limpia y segura
+minikube stop
+```
+
+Para reanudar el proyecto posteriormente con todos sus datos y servicios tal como quedaron:
+
+```bash
+# Encender el clúster (todo se restaura automáticamente en segundos)
+minikube start
+```
+
+---
+
+### Modo B: Desmantelamiento y Limpieza de Recursos (Teardown Completo)
+
+Si desea eliminar todas las cargas de trabajo desplegadas en Kubernetes respetando el orden topológico inverso de dependencias:
+
+#### Opción 1: Mediante Script Automatizado
+```bash
+./scripts/teardown.sh
+```
+
+#### Opción 2: Ejecución Manual Paso a Paso
+```bash
+# 1. Eliminar capa de enrutamiento Ingress, HPA y NetworkPolicies
+kubectl delete -f k8s/ingress/ --ignore-not-found=true
+kubectl delete -f k8s/hpa/ --ignore-not-found=true
+kubectl delete -f k8s/network-policies/ --ignore-not-found=true
+
+# 2. Eliminar capa de aplicación (Frontend, Backend Stable y Canary)
+kubectl delete -f k8s/app/ --ignore-not-found=true
+
+# 3. Desinstalar release de Kubecost FinOps
+helm uninstall kubecost -n docuprocess-finops
+
+# 4. Eliminar observabilidad y logging centralizado (ELK, Prometheus, Grafana, Jaeger)
+kubectl delete -f k8s/monitoring/ --ignore-not-found=true
+kubectl delete -f k8s/logging/ --ignore-not-found=true
+
+# 5. Eliminar seguridad y persistencia de datos (Keycloak y PostgreSQL)
+kubectl delete -f k8s/security/ --ignore-not-found=true
+kubectl delete -f k8s/data/ --ignore-not-found=true
+
+# 6. Eliminar volúmenes persistentes (PVCs) y namespaces
+kubectl delete -f k8s/base/storage/ --ignore-not-found=true
+kubectl delete -f k8s/base/namespaces/ --ignore-not-found=true
+
+# 7. (Opcional) Limpiar entradas DNS en el host físico
+sudo sed -i '/docuprocess.local/d' /etc/hosts
+
+# 8. Detener o destruir el clúster Minikube
+minikube stop    # Para pausar
+# minikube delete  # ¡Cuidado! Destruye la máquina virtual y todos sus datos
+```
+
+---
+
+## 9. Documentación Académica y Recursos para la Sustentación
 
 En la carpeta [`docs/`](docs/) se encuentran los entregables detallados para la sustentación ante el docente y compañeros:
 
