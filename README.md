@@ -71,7 +71,7 @@ sudo bash -c "echo '$(minikube ip) app.docuprocess.local api.docuprocess.local a
 ### Usuarios Preconfigurados en Keycloak (`docuprocess-enterprise`)
 
 - **Administrador Empresarial (`TENANT_ADMIN`):** `admin@docuprocess.com` / `AdminPass2026!` (Santiago Gómez Robledo)
-- **Operador Operativo (`DOCUMENT_OPERATOR`):** `operator@docuprocess.com` / `OperatorPass2026!` (Carlos Operador)
+- **Operador Operativo (`DOCUMENT_OPERATOR`):** `operator@docuprocess.com` / `OperatorPass2026!` 
 - **Auditora de Cumplimiento (`AUDITOR`):** `auditor@docuprocess.com` / `AuditorPass2026!` (Valeria Ortiz)
 
 ---
