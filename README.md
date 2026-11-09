@@ -1,5 +1,5 @@
 # DocuProcess Cloud — Plataforma SaaS Enterprise
-> **Proyecto Final de Infraestructura III**  
+>
 > **Universidad ICESI** — Facultad de Ingeniería, Diseño y Ciencias Aplicadas  
 > **Integrantes:** Santiago Gómez Robledo &amp; Valeria Ortiz  
 > **Entorno:** Kubernetes v1.32.0 (Minikube Engine v1.39.0 sobre Containerd)  
@@ -12,7 +12,9 @@
 **DocuProcess Cloud** es una solución de Software as a Service (SaaS) multitenant orientada al procesamiento asíncrono y análisis inteligente de documentos e imágenes corporativas (facturas electrónicas DIAN, contratos legales, documentos de identidad y reportes técnicos).
 
 ### Problemática de Negocio Resuelta
+
 En los cierres contables mensuales y temporadas de alta demanda, los clientes enterprise experimentan caídas de servicio causadas por el bloqueo síncrono de hilos HTTP en servidores monolíticos. DocuProcess Cloud solventa esto mediante:
+
 1. **Ingesta Inmediata No Bloqueante:** Retorno en tiempo real de `HTTP 202 Accepted` con UUID de seguimiento (`tracking_id`).
 2. **Cómputo Elástico y Desacoplado:** Pools de procesamiento asíncrono gestionados por **Horizontal Pod Autoscaler (HPA v2)** que escalan automáticamente de 2 a 8 réplicas al superar el 70% de utilización de CPU.
 3. **Despliegues Progresivos Sin Interrupción:** **Canary Deployments** en el Ingress Controller que dividen el tráfico 90% a la versión estable (`v1.0.0`) y 10% a la versión Canary (`v2.0.0`), mitigando el radio de impacto ante errores.
@@ -106,7 +108,7 @@ flowchart TD
 | **Backend** | Java + Spring Boot | Java 21 / Spring Boot 3.4.3 | Microservicio REST asíncrono con OpenAPI 3 y Micrometer |
 | **Base de Datos** | PostgreSQL | 17-alpine | StatefulSet relacional para tareas, metadatos y backend Keycloak |
 | **Identidad & SSO** | Keycloak | 26.1.3 (Quarkus) | Servidor OIDC/OAuth2 con MFA (TOTP) y roles RBAC |
-| **Centralización Logs**| Stack ELK | 8.17.2 | Elasticsearch (data node), Logstash (pipeline TCP/JSON) y Kibana |
+| **Centralización Logs** | Stack ELK | 8.17.2 | Elasticsearch (data node), Logstash (pipeline TCP/JSON) y Kibana |
 | **Métricas & Alertas** | Prometheus + Alertmanager | Prom v3.2 / Alert v0.28 | Scrape de métricas RED/USE y reglas de latencia $P_{99} > 2.5\text{s}$ |
 | **Trazabilidad** | OpenTelemetry + Jaeger | OTel 0.118 / Jaeger 1.64 | Spans distribuidos correlacionados por cabecera W3C `traceparent` |
 | **Visualización** | Grafana | 11.5.2 | Dashboard unificado (Negocio, RED, USE, enlaces a Kibana/Jaeger) |
@@ -133,7 +135,8 @@ sudo bash -c "echo '$(minikube ip) app.docuprocess.local api.docuprocess.local a
 | `http://jaeger.docuprocess.local` | Jaeger Distributed Tracing | Acceso directo / Sin contraseña |
 | `http://kubecost.docuprocess.local` | Kubecost FinOps Dashboard | Acceso directo / Sin contraseña |
 
-### Usuarios Preconfigurados en Keycloak (`docuprocess-enterprise`):
+### Usuarios Preconfigurados en Keycloak (`docuprocess-enterprise`)
+
 - **Administrador Empresarial (`TENANT_ADMIN`):** `admin@docuprocess.com` / `AdminPass2026!` (Santiago Gómez Robledo)
 - **Operador Operativo (`DOCUMENT_OPERATOR`):** `operator@docuprocess.com` / `OperatorPass2026!` (Carlos Operador)
 - **Auditora de Cumplimiento (`AUDITOR`):** `auditor@docuprocess.com` / `AuditorPass2026!` (Valeria Ortiz)
@@ -143,35 +146,41 @@ sudo bash -c "echo '$(minikube ip) app.docuprocess.local api.docuprocess.local a
 ## 5. Guía de Despliegue y Puesta en Marcha
 
 ### Prerrequisitos
+
 - Linux con Docker Engine activo.
 - Minikube v1.39.0+, `kubectl` y `helm` v3+.
 - Recursos mínimos recomendados en el host: 8 vCPUs y 16 GiB RAM.
 
 ### 5.1. Inicializar el Clúster Minikube
+
 ```bash
 minikube start --driver=docker --cpus=8 --memory=14336 --disk-size=40g \
                --addons=ingress,metrics-server,storage-provisioner,default-storageclass
 ```
 
 ### 5.2. Desplegar Infraestructura Base (Namespaces y Almacenamiento)
+
 ```bash
 kubectl apply -f k8s/base/namespaces/00-namespaces.yaml
 kubectl apply -f k8s/base/storage/01-pvcs.yaml
 ```
 
 ### 5.3. Desplegar Base de Datos PostgreSQL 17 y Keycloak 26
+
 ```bash
 kubectl apply -f k8s/data/
 kubectl apply -f k8s/security/
 ```
 
 ### 5.4. Desplegar Stack de Logging ELK y Observabilidad
+
 ```bash
 kubectl apply -f k8s/logging/
 kubectl apply -f k8s/monitoring/
 ```
 
 ### 5.5. Desplegar Kubecost (FinOps)
+
 ```bash
 helm repo add kubecost https://kubecost.github.io/cost-analyzer/
 helm upgrade --install kubecost kubecost/cost-analyzer --version 2.8.7 \
@@ -182,6 +191,7 @@ helm upgrade --install kubecost kubecost/cost-analyzer --version 2.8.7 \
 ```
 
 ### 5.6. Compilar Imágenes OCI y Cargar a Minikube
+
 ```bash
 # Compilar backend versión estable (v1.0.0) y versión canary (v2.0.0)
 docker build -t docuprocess-backend:1.0.0 --build-arg APP_VERSION=1.0.0 backend/
@@ -197,6 +207,7 @@ minikube image load docuprocess-frontend:1.0.0
 ```
 
 ### 5.7. Desplegar Aplicaciones, Políticas de Red, HPA e Ingress
+
 ```bash
 kubectl apply -f k8s/app/
 kubectl apply -f k8s/network-policies/
@@ -211,23 +222,31 @@ kubectl apply -f k8s/ingress/
 El repositorio incluye herramientas automatizadas de auditoría y prueba de estrés:
 
 ### 6.1. Auditoría del Definition of Done (DoD 100%)
+
 Evalúa automáticamente los 8 criterios de aceptación exigidos por la Universidad ICESI:
+
 ```bash
 ./scripts/e2e-validate.sh
 ```
 
 ### 6.2. Validación Estadística de Canary Deployment (90/10)
+
 Envía 100 solicitudes HTTP concurrentes hacia `api.docuprocess.local` y calcula el porcentaje de balanceo real:
+
 ```bash
 ./scripts/verify-canary.sh 100
 ```
+
 Para forzar tráfico hacia Canary mediante cabecera en pruebas de QA:
+
 ```bash
 curl -H "Host: api.docuprocess.local" -H "X-Canary-Test: always" http://$(minikube ip)/api/v1/documents/version
 ```
 
 ### 6.3. Prueba de Carga y Autoescalado HPA
+
 Inyecta lotes asíncronos concurrentes y ciclos de cómputo para saturar CPU y observar el autoescalado de réplicas en vivo:
+
 ```bash
 ./scripts/test-hpa.sh
 ```
@@ -237,14 +256,19 @@ Inyecta lotes asíncronos concurrentes y ciclos de cómputo para saturar CPU y o
 ## 7. Procedimiento de Rollback Inmediato ante Fallos
 
 Si la versión Canary (`v2.0.0`) presenta un incremento en la tasa de errores o degradación de latencia ($P_{99} > 2.5\text{s}$):
+
 1. **Retirar Tráfico del Canary:** Establezca `canary-weight: "0"` en el Ingress:
+
    ```bash
    kubectl annotate ingress -n docuprocess-app docuprocess-api-canary-ingress nginx.ingress.kubernetes.io/canary-weight="0" --overwrite
    ```
+
 2. **Aislar Pods Canary:** Escale a 0 el deployment canary:
+
    ```bash
    kubectl scale deployment -n docuprocess-app docuprocess-backend-canary --replicas=0
    ```
+
 3. El 100% de las solicitudes será absorbido inmediatamente por `docuprocess-backend-stable` sin indisponibilidad para los clientes.
 
 ---
@@ -252,7 +276,7 @@ Si la versión Canary (`v2.0.0`) presenta un incremento en la tasa de errores o 
 ## 8. Documentación Académica y Recursos para la Sustentación
 
 En la carpeta [`docs/`](docs/) se encuentran los entregables detallados para la sustentación ante el docente y compañeros:
+
 - **Estructura de Diapositivas:** [`docs/PRESENTATION_SLIDES.md`](docs/PRESENTATION_SLIDES.md) (11 diapositivas completas con caso de negocio, arquitectura y conclusiones).
 - **Guion Minuto a Minuto:** [`docs/GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md`](docs/GUION_EXPOSICION_SANTIAGO_Y_VALERIA.md) (Distribución exacta de intervenciones entre Valeria Ortiz y Santiago Gómez Robledo).
 - **Runbook Técnico:** [`docs/RUNBOOK.md`](docs/RUNBOOK.md) (Manual de ingeniería y resolución de fallos).
-
