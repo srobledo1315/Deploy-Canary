@@ -1,0 +1,292 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="100%" height="100%" style="background-color: #0b0f19; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="grad-title" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <linearGradient id="grad-ingress" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <linearGradient id="grad-app" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#312e81" />
+    </linearGradient>
+    <linearGradient id="grad-sec" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4c0519" />
+      <stop offset="100%" stop-color="#881337" />
+    </linearGradient>
+    <linearGradient id="grad-data" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#172554" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+    <linearGradient id="grad-log" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b0764" />
+      <stop offset="100%" stop-color="#581c87" />
+    </linearGradient>
+    <linearGradient id="grad-obs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="grad-card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="glow-ingress" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#10b981" flood-opacity="0.4"/>
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#c084fc"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas Background Grid -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.75" stroke-opacity="0.4"/>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#grid)" />
+
+  <!-- HEADER -->
+  <g transform="translate(40, 28)">
+    <text x="0" y="24" font-size="24" font-weight="800" fill="url(#grad-title)" letter-spacing="-0.5">DocuProcess Cloud — Topología de Red e Infraestructura Kubernetes</text>
+    <text x="0" y="44" font-size="12" font-weight="500" fill="#94a3b8">Minikube v1.39.0 • Zero-Trust L3/L4 Network Policies • NGINX Canary (90/10) • Observabilidad RED/USE • Kubecost FinOps</text>
+    <text x="960" y="24" font-size="12" font-weight="700" fill="#cbd5e1" text-anchor="end">Universidad ICESI | Infraestructura III</text>
+    <text x="960" y="42" font-size="11" font-weight="600" fill="#38bdf8" text-anchor="end">Santiago Gómez Robledo &amp; Valeria Ortiz</text>
+  </g>
+
+  <!-- 1. EXTERNAL INGRESS TIER (Top Center) -->
+  <g transform="translate(360, 90)" filter="url(#shadow)">
+    <!-- Boundary Box -->
+    <rect x="0" y="0" width="480" height="85" rx="14" fill="#064e3b" fill-opacity="0.4" stroke="#10b981" stroke-width="2" filter="url(#glow-ingress)"/>
+    
+    <!-- Icon & Title -->
+    <circle cx="36" cy="42" r="20" fill="#047857" />
+    <path d="M 28 42 L 44 42 M 36 34 L 44 42 L 36 50" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <text x="70" y="32" font-size="15" font-weight="700" fill="#34d399">NGINX Ingress Controller (SSL/TLS Termination)</text>
+    <text x="70" y="50" font-size="11" font-weight="500" fill="#a7f3d0">Host IP: 192.168.49.2 • Split Ratio: 90% Base / 10% Canary • Header: X-Canary-Test: always</text>
+    <text x="70" y="68" font-size="10" font-family="'JetBrains Mono', monospace" fill="#6ee7b7">app.docuprocess.local | api.docuprocess.local | auth.docuprocess.local | grafana.docuprocess.local</text>
+  </g>
+
+  <!-- 2. NAMESPACE: docuprocess-app (Center Left) -->
+  <g transform="translate(40, 205)" filter="url(#shadow)">
+    <!-- Box -->
+    <rect x="0" y="0" width="530" height="340" rx="16" fill="url(#grad-app)" fill-opacity="0.35" stroke="#6366f1" stroke-width="1.8" stroke-dasharray="none"/>
+    <rect x="16" y="14" width="160" height="24" rx="6" fill="#4338ca" />
+    <text x="24" y="30" font-size="11" font-weight="700" fill="#e0e7ff">NAMESPACE: docuprocess-app</text>
+
+    <!-- Card 1: Frontend -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="490" height="72" rx="10" fill="url(#grad-card)" stroke="#475569" stroke-width="1"/>
+      <circle cx="28" cy="36" r="16" fill="#38bdf8" fill-opacity="0.2" />
+      <text x="28" y="41" font-size="16" text-anchor="middle" fill="#38bdf8">⚛</text>
+      <text x="56" y="28" font-size="13" font-weight="700" fill="#f8fafc">docuprocess-frontend (x2 Replicas)</text>
+      <text x="56" y="44" font-size="11" fill="#94a3b8">React 19 + TypeScript + Vite + Tailwind CSS (Dark Mode / Responsive)</text>
+      <text x="56" y="60" font-size="10" font-family="'JetBrains Mono', monospace" fill="#38bdf8">Service: docuprocess-frontend-service:80 (ClusterIP)</text>
+      <rect x="405" y="12" width="72" height="20" rx="4" fill="#0284c7" fill-opacity="0.3"/>
+      <text x="441" y="26" font-size="10" font-weight="700" fill="#38bdf8" text-anchor="middle">PORT 80</text>
+    </g>
+
+    <!-- Card 2: Backend Stable -->
+    <g transform="translate(20, 132)">
+      <rect x="0" y="0" width="490" height="88" rx="10" fill="url(#grad-card)" stroke="#10b981" stroke-width="1.2"/>
+      <circle cx="28" cy="44" r="16" fill="#10b981" fill-opacity="0.2" />
+      <text x="28" y="49" font-size="14" text-anchor="middle" fill="#34d399">☕</text>
+      <text x="56" y="26" font-size="13" font-weight="700" fill="#f8fafc">docuprocess-backend-stable (v1.0.0)</text>
+      <text x="56" y="42" font-size="11" fill="#94a3b8">Java 21 • Spring Boot 3.5.x • HPA Replicas: 2 → 8 • Target CPU: 70%</text>
+      <text x="56" y="58" font-size="10" font-family="'JetBrains Mono', monospace" fill="#6ee7b7">Service: docuprocess-backend-service:8080 (ClusterIP)</text>
+      <text x="56" y="74" font-size="10" fill="#cbd5e1">Metrics: Actuator RED Model • Tracing: OpenTelemetry SDK</text>
+      <rect x="400" y="12" width="78" height="20" rx="4" fill="#047857"/>
+      <text x="439" y="26" font-size="10" font-weight="800" fill="#ecfdf5" text-anchor="middle">STABLE 90%</text>
+    </g>
+
+    <!-- Card 3: Backend Canary -->
+    <g transform="translate(20, 230)">
+      <rect x="0" y="0" width="310" height="92" rx="10" fill="url(#grad-card)" stroke="#f59e0b" stroke-width="1.2"/>
+      <circle cx="28" cy="46" r="16" fill="#f59e0b" fill-opacity="0.2" />
+      <text x="28" y="51" font-size="14" text-anchor="middle" fill="#fbbf24">🐤</text>
+      <text x="56" y="26" font-size="13" font-weight="700" fill="#f8fafc">docuprocess-backend-canary (v2.0.0)</text>
+      <text x="56" y="42" font-size="11" fill="#94a3b8">Evaluación progresiva de nueva release</text>
+      <text x="56" y="58" font-size="10" font-family="'JetBrains Mono', monospace" fill="#fcd34d">Service: docuprocess-canary-service:8080</text>
+      <text x="56" y="74" font-size="10" fill="#fef3c7">Header Bypass: X-Canary-Test: always</text>
+      <rect x="220" y="10" width="80" height="20" rx="4" fill="#b45309"/>
+      <text x="260" y="24" font-size="10" font-weight="800" fill="#fef3c7" text-anchor="middle">CANARY 10%</text>
+    </g>
+
+    <!-- Card 4: Document Storage PVC -->
+    <g transform="translate(345, 230)">
+      <rect x="0" y="0" width="165" height="92" rx="10" fill="url(#grad-card)" stroke="#64748b" stroke-width="1"/>
+      <text x="16" y="26" font-size="11" font-weight="700" fill="#f8fafc">💾 Document Storage</text>
+      <text x="16" y="44" font-size="10" fill="#94a3b8">PVC: 10Gi (RWO)</text>
+      <text x="16" y="60" font-size="9" font-family="'JetBrains Mono', monospace" fill="#38bdf8">/data/storage</text>
+      <text x="16" y="76" font-size="9" fill="#64748b">standard storageclass</text>
+    </g>
+  </g>
+
+  <!-- 3. NAMESPACE: docuprocess-security (Keycloak) (Center Right Upper) -->
+  <g transform="translate(610, 205)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="155" rx="14" fill="url(#grad-sec)" fill-opacity="0.3" stroke="#e11d48" stroke-width="1.6"/>
+    <rect x="14" y="12" width="180" height="22" rx="5" fill="#9f1239" />
+    <text x="22" y="27" font-size="10" font-weight="700" fill="#ffe4e6">NAMESPACE: docuprocess-security</text>
+
+    <g transform="translate(14, 44)">
+      <rect x="0" y="0" width="232" height="95" rx="8" fill="url(#grad-card)" stroke="#881337" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#fda4af">🔐 Keycloak 26 (SSO / OIDC)</text>
+      <text x="12" y="42" font-size="10" fill="#cbd5e1">Realm: <tspan fill="#f43f5e" font-weight="700">docuprocess-enterprise</tspan></text>
+      <text x="12" y="58" font-size="10" fill="#94a3b8">Roles: TENANT_ADMIN, OPERATOR, AUDITOR</text>
+      <text x="12" y="74" font-size="10" fill="#cbd5e1">MFA: TOTP • Brute Force Shield</text>
+      <text x="12" y="88" font-size="9" font-family="'JetBrains Mono', monospace" fill="#fda4af">Port: 8080 (HTTP) / 9000 (Metrics)</text>
+    </g>
+  </g>
+
+  <!-- 4. NAMESPACE: docuprocess-data (PostgreSQL) (Center Right Lower) -->
+  <g transform="translate(610, 390)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="155" rx="14" fill="url(#grad-data)" fill-opacity="0.35" stroke="#3b82f6" stroke-width="1.6"/>
+    <rect x="14" y="12" width="170" height="22" rx="5" fill="#1d4ed8" />
+    <text x="22" y="27" font-size="10" font-weight="700" fill="#dbeafe">NAMESPACE: docuprocess-data</text>
+
+    <g transform="translate(14, 44)">
+      <rect x="0" y="0" width="232" height="95" rx="8" fill="url(#grad-card)" stroke="#1e40af" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#93c5fd">🐘 PostgreSQL 17 StatefulSet</text>
+      <text x="12" y="42" font-size="10" fill="#cbd5e1">DBs: <tspan fill="#60a5fa">docuprocess_db</tspan> &amp; <tspan fill="#60a5fa">keycloak_db</tspan></text>
+      <text x="12" y="58" font-size="10" fill="#94a3b8">Crypto: pgcrypto &amp; uuid-ossp</text>
+      <text x="12" y="74" font-size="10" fill="#cbd5e1">PVC: 5Gi (postgres-data-pvc)</text>
+      <text x="12" y="88" font-size="9" font-family="'JetBrains Mono', monospace" fill="#60a5fa">Service: postgresql-service:5432</text>
+    </g>
+  </g>
+
+  <!-- 5. NAMESPACE: docuprocess-finops (Kubecost) (Far Right Upper) -->
+  <g transform="translate(900, 205)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="155" rx="14" fill="#064e3b" fill-opacity="0.35" stroke="#10b981" stroke-width="1.6"/>
+    <rect x="14" y="12" width="165" height="22" rx="5" fill="#047857" />
+    <text x="22" y="27" font-size="10" font-weight="700" fill="#d1fae5">NAMESPACE: docuprocess-finops</text>
+
+    <g transform="translate(14, 44)">
+      <rect x="0" y="0" width="232" height="95" rx="8" fill="url(#grad-card)" stroke="#065f46" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#6ee7b7">💵 Kubecost 2.8.7 (FinOps)</text>
+      <text x="12" y="42" font-size="10" fill="#cbd5e1">Atribución de Costos por Tenant</text>
+      <text x="12" y="58" font-size="10" fill="#94a3b8">CPU/RAM/Storage en Tiempo Real</text>
+      <text x="12" y="74" font-size="10" fill="#cbd5e1">Unit Economics: $0.0014 / doc</text>
+      <text x="12" y="88" font-size="9" font-family="'JetBrains Mono', monospace" fill="#34d399">Service: kubecost-cost-analyzer:9090</text>
+    </g>
+  </g>
+
+  <!-- 6. NAMESPACE: docuprocess-logging (ELK Stack) (Far Right Lower) -->
+  <g transform="translate(900, 390)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="155" rx="14" fill="url(#grad-log)" fill-opacity="0.35" stroke="#a855f7" stroke-width="1.6"/>
+    <rect x="14" y="12" width="170" height="22" rx="5" fill="#7e22ce" />
+    <text x="22" y="27" font-size="10" font-weight="700" fill="#f3e8ff">NAMESPACE: docuprocess-logging</text>
+
+    <g transform="translate(14, 44)">
+      <rect x="0" y="0" width="232" height="95" rx="8" fill="url(#grad-card)" stroke="#6b21a8" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#d8b4fe">🪵 Stack ELK Centralizado</text>
+      <text x="12" y="42" font-size="10" fill="#cbd5e1">Logstash: TCP 5000 (JSON asíncrono)</text>
+      <text x="12" y="58" font-size="10" fill="#cbd5e1">Elasticsearch 8.17: Indices diarios</text>
+      <text x="12" y="74" font-size="10" fill="#cbd5e1">Kibana 8.17: Visualización (Port 5601)</text>
+      <text x="12" y="88" font-size="9" font-family="'JetBrains Mono', monospace" fill="#c084fc">Correlación: traceId + tenantId</text>
+    </g>
+  </g>
+
+  <!-- 7. NAMESPACE: docuprocess-monitoring (Prometheus, Grafana, Jaeger, OTel) (Bottom Span) -->
+  <g transform="translate(40, 575)" filter="url(#shadow)">
+    <rect x="0" y="0" width="1120" height="210" rx="16" fill="url(#grad-obs)" fill-opacity="0.6" stroke="#0284c7" stroke-width="1.8"/>
+    <rect x="20" y="14" width="200" height="24" rx="6" fill="#0369a1" />
+    <text x="30" y="30" font-size="11" font-weight="700" fill="#e0f2fe">NAMESPACE: docuprocess-monitoring</text>
+    <text x="240" y="31" font-size="11" font-weight="500" fill="#94a3b8">Plataforma Unificada de Observabilidad Multinivel (Modelos RED &amp; USE)</text>
+
+    <!-- Sub-card 1: Prometheus & Alertmanager -->
+    <g transform="translate(20, 52)">
+      <rect x="0" y="0" width="260" height="138" rx="10" fill="url(#grad-card)" stroke="#e11d48" stroke-width="1.2"/>
+      <text x="16" y="24" font-size="13" font-weight="700" fill="#f43f5e">🔥 Prometheus &amp; Alertmanager</text>
+      <text x="16" y="44" font-size="11" fill="#cbd5e1">Scrape 15s • 14 Targets Activos</text>
+      <text x="16" y="62" font-size="10" fill="#94a3b8">Reglas RED: Tasa Error 5xx &gt; 2%</text>
+      <text x="16" y="78" font-size="10" fill="#94a3b8">Reglas RED: Latencia P99 &gt; 2.5s</text>
+      <text x="16" y="94" font-size="10" fill="#94a3b8">Reglas USE: CPU Nodo &gt; 85%</text>
+      <text x="16" y="120" font-size="9" font-family="'JetBrains Mono', monospace" fill="#fda4af">Ports: 9090 (Prom) / 9093 (Alerts)</text>
+    </g>
+
+    <!-- Sub-card 2: OpenTelemetry Collector -->
+    <g transform="translate(295, 52)">
+      <rect x="0" y="0" width="255" height="138" rx="10" fill="url(#grad-card)" stroke="#0284c7" stroke-width="1.2"/>
+      <text x="16" y="24" font-size="13" font-weight="700" fill="#38bdf8">📡 OpenTelemetry Collector</text>
+      <text x="16" y="44" font-size="11" fill="#cbd5e1">Protocolo: OTLP gRPC / HTTP</text>
+      <text x="16" y="62" font-size="10" fill="#94a3b8">Pipelines de Trazas Desacopladas</text>
+      <text x="16" y="78" font-size="10" fill="#94a3b8">Batch &amp; Memory Limiter Processors</text>
+      <text x="16" y="94" font-size="10" fill="#94a3b8">Exportador hacia Jaeger All-in-One</text>
+      <text x="16" y="120" font-size="9" font-family="'JetBrains Mono', monospace" fill="#7dd3fc">Ports: 4317 (gRPC) / 4318 (HTTP)</text>
+    </g>
+
+    <!-- Sub-card 3: Jaeger Distributed Tracing -->
+    <g transform="translate(565, 52)">
+      <rect x="0" y="0" width="255" height="138" rx="10" fill="url(#grad-card)" stroke="#06b6d4" stroke-width="1.2"/>
+      <text x="16" y="24" font-size="13" font-weight="700" fill="#22d3ee">🔍 Jaeger All-in-One</text>
+      <text x="16" y="44" font-size="11" fill="#cbd5e1">Trazabilidad Distribuida E2E</text>
+      <text x="16" y="62" font-size="10" fill="#94a3b8">Spans: Ingress → Backend → DB</text>
+      <text x="16" y="78" font-size="10" fill="#94a3b8">Correlación con W3C traceparent</text>
+      <text x="16" y="94" font-size="10" fill="#94a3b8">Diagnóstico de Cuellos de Botella</text>
+      <text x="16" y="120" font-size="9" font-family="'JetBrains Mono', monospace" fill="#67e8f9">Service: jaeger-service:16686</text>
+    </g>
+
+    <!-- Sub-card 4: Grafana Unified Dashboard -->
+    <g transform="translate(835, 52)">
+      <rect x="0" y="0" width="265" height="138" rx="10" fill="url(#grad-card)" stroke="#f97316" stroke-width="1.2"/>
+      <text x="16" y="24" font-size="13" font-weight="700" fill="#fb923c">📊 Grafana Unified Dashboard</text>
+      <text x="16" y="44" font-size="11" fill="#cbd5e1">Visión Ejecutiva y Técnica</text>
+      <text x="16" y="62" font-size="10" fill="#94a3b8">Fila 1: KPIs Negocio SaaS Enterprise</text>
+      <text x="16" y="78" font-size="10" fill="#94a3b8">Fila 2: Modelo RED (Rate/Errors/Dur)</text>
+      <text x="16" y="94" font-size="10" fill="#94a3b8">Fila 3: Modelo USE (CPU/RAM/Pods)</text>
+      <text x="16" y="120" font-size="9" font-family="'JetBrains Mono', monospace" fill="#fdba74">Service: grafana-service:3000</text>
+    </g>
+  </g>
+
+  <!-- INTERCONNECTION PATHS / CONNECTORS -->
+  <!-- Ingress to Frontend -->
+  <path d="M 450 175 L 450 190 L 180 190 L 180 250" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  
+  <!-- Ingress to Backend Stable (90%) -->
+  <path d="M 580 175 L 580 335" fill="none" stroke="#34d399" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  
+  <!-- Ingress to Backend Canary (10%) -->
+  <path d="M 620 175 L 620 195 L 300 195 L 300 435" fill="none" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow-orange)"/>
+
+  <!-- Ingress to Keycloak -->
+  <path d="M 720 175 L 720 205" fill="none" stroke="#fda4af" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+  <!-- Backend to Postgres (Port 5432) -->
+  <path d="M 530 380 L 610 440" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Backend to Keycloak (JWT Validation) -->
+  <path d="M 530 360 L 610 280" fill="none" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arrow-blue)"/>
+
+  <!-- Backend to Logstash (TCP 5000) -->
+  <path d="M 530 400 L 890 400 L 900 440" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-dasharray="5" marker-end="url(#arrow-purple)"/>
+
+  <!-- Backend to OTel Collector (4318) -->
+  <path d="M 280 545 L 280 560 L 420 560 L 420 625" fill="none" stroke="#38bdf8" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+
+  <!-- Backend to Prometheus (Scrape) -->
+  <path d="M 150 545 L 150 625" fill="none" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="4" marker-end="url(#arrow-blue)"/>
+
+  <!-- Network Policy Shield Badge (Floating) -->
+  <g transform="translate(40, 172)">
+    <rect x="0" y="0" width="220" height="22" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+    <text x="8" y="15" font-size="10" font-weight="700" fill="#34d399">🛡️ NetworkPolicies: Default Deny L3/L4</text>
+  </g>
+</svg>
