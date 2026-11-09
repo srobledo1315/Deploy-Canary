@@ -123,7 +123,7 @@ data:
           "type": "stat",
           "gridPos": { "h": 4, "w": 6, "x": 18, "y": 1 },
           "targets": [
-            { "datasource": "Prometheus", "expr": "sum(rate(node_cpu_seconds_total[5m])) * 0.04 * 24 or vector(3.20)", "refId": "A" }
+            { "datasource": "Prometheus", "expr": "sum(rate(container_cpu_usage_seconds_total{id=\"/\"}[5m])) * 0.04 * 24 or on() vector(3.20)", "refId": "A" }
           ],
           "fieldConfig": {
             "defaults": { "unit": "currencyUSD", "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "blue", "value": null }] } }
@@ -149,7 +149,8 @@ data:
           "type": "timeseries",
           "gridPos": { "h": 6, "w": 8, "x": 8, "y": 6 },
           "targets": [
-            { "datasource": "Prometheus", "expr": "sum by (status) (rate(http_server_requests_seconds_count{status=~\"[45]..\"}[1m]))", "legendFormat": "HTTP {{status}}", "refId": "A" }
+            { "datasource": "Prometheus", "expr": "sum(rate(http_server_requests_seconds_count{status=~\"4..\"}[1m])) or on() vector(0)", "legendFormat": "HTTP 4xx", "refId": "A" },
+            { "datasource": "Prometheus", "expr": "sum(rate(http_server_requests_seconds_count{status=~\"5..\"}[1m])) or on() vector(0)", "legendFormat": "HTTP 5xx", "refId": "B" }
           ],
           "fieldConfig": { "defaults": { "unit": "reqps" } }
         },
@@ -158,9 +159,9 @@ data:
           "type": "timeseries",
           "gridPos": { "h": 6, "w": 8, "x": 16, "y": 6 },
           "targets": [
-            { "datasource": "Prometheus", "expr": "histogram_quantile(0.50, sum(rate(http_server_requests_seconds_bucket{uri=~'.*process.*'}[1m])) by (le))", "legendFormat": "P50 Latency", "refId": "A" },
-            { "datasource": "Prometheus", "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{uri=~'.*process.*'}[1m])) by (le))", "legendFormat": "P95 Latency", "refId": "B" },
-            { "datasource": "Prometheus", "expr": "histogram_quantile(0.99, sum(rate(http_server_requests_seconds_bucket{uri=~'.*process.*'}[1m])) by (le))", "legendFormat": "P99 Latency", "refId": "C" }
+            { "datasource": "Prometheus", "expr": "max(docuprocess_processing_duration_seconds{quantile=\"0.5\"}) or on() vector(0)", "legendFormat": "P50 Latency", "refId": "A" },
+            { "datasource": "Prometheus", "expr": "max(docuprocess_processing_duration_seconds{quantile=\"0.95\"}) or on() vector(0)", "legendFormat": "P95 Latency", "refId": "B" },
+            { "datasource": "Prometheus", "expr": "max(docuprocess_processing_duration_seconds{quantile=\"0.99\"}) or on() vector(0)", "legendFormat": "P99 Latency", "refId": "C" }
           ],
           "fieldConfig": { "defaults": { "unit": "s" } }
         },
@@ -175,7 +176,7 @@ data:
           "type": "timeseries",
           "gridPos": { "h": 6, "w": 8, "x": 0, "y": 13 },
           "targets": [
-            { "datasource": "Prometheus", "expr": "(1 - avg(rate(node_cpu_seconds_total{mode=\"idle\"}[1m]))) * 100", "legendFormat": "CPU Busy %", "refId": "A" }
+            { "datasource": "Prometheus", "expr": "(sum(rate(container_cpu_usage_seconds_total{id=\"/\"}[1m])) / sum(machine_cpu_cores)) * 100", "legendFormat": "CPU Busy %", "refId": "A" }
           ],
           "fieldConfig": { "defaults": { "min": 0, "max": 100, "unit": "percent" } }
         },
@@ -193,7 +194,9 @@ data:
           "type": "timeseries",
           "gridPos": { "h": 6, "w": 8, "x": 16, "y": 13 },
           "targets": [
-            { "datasource": "Prometheus", "expr": "sum by (deployment) (kube_deployment_status_replicas{namespace=\"docuprocess-app\"})", "legendFormat": "{{deployment}}", "refId": "A" }
+            { "datasource": "Prometheus", "expr": "count(container_last_seen{namespace=\"docuprocess-app\",pod=~\"docuprocess-backend-stable-.*\",container=\"backend\"}) or on() vector(0)", "legendFormat": "docuprocess-backend-stable", "refId": "A" },
+            { "datasource": "Prometheus", "expr": "count(container_last_seen{namespace=\"docuprocess-app\",pod=~\"docuprocess-backend-canary-.*\",container=\"backend\"}) or on() vector(0)", "legendFormat": "docuprocess-backend-canary", "refId": "B" },
+            { "datasource": "Prometheus", "expr": "count(container_last_seen{namespace=\"docuprocess-app\",pod=~\"docuprocess-frontend-.*\",container=\"frontend\"}) or on() vector(0)", "legendFormat": "docuprocess-frontend", "refId": "C" }
           ],
           "fieldConfig": { "defaults": { "unit": "none" } }
         }
