@@ -4,7 +4,7 @@
 **Asignatura:** Plataformas II — Universidad ICESI  
 **Expositores:** Santiago Gómez Robledo & Valeria Ortiz  
 **Tiempo Total Estimado:** 15 Minutos (10 min exposición teórica + 4 min demostración en vivo + 1 min conclusiones y preguntas)  
-**Entorno de Despliegue:** Kubernetes v1.32.0 (Minikube v1.39.0 sobre Containerd, 8 vCPUs, 14 GiB RAM)  
+**Entorno de Despliegue:** Kubernetes v1.37.0 (Minikube v1.39.0 sobre Containerd 2.3.4, 8 vCPUs, 14 GiB RAM)  
 
 ---
 

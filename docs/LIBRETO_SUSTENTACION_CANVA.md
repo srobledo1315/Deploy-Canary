@@ -3,7 +3,7 @@
 **Asignatura:** Plataformas II — Departamento de TIC — Universidad ICESI  
 **Autores y Expositores:** Santiago Gómez Robledo & Valeria Ortiz  
 **Duración Total:** 15 Minutos (10 minutos exposición teórica/arquitectónica + 4 minutos demostración en vivo + 1 minuto conclusiones y preguntas)  
-**Entorno de Demostración:** Kubernetes v1.32.0 (Minikube v1.39.0 sobre Containerd, 8 vCPUs, 14 GiB RAM)  
+**Entorno de Demostración:** Kubernetes v1.37.0 (Minikube v1.39.0 sobre Containerd 2.3.4, 8 vCPUs, 14 GiB RAM)  
 
 ---
 
